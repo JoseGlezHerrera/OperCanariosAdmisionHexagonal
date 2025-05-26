@@ -1,0 +1,28 @@
+﻿using AutoMapper;
+using Oper.Admision.Application.UseCases.Usuarios.GetTodos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Oper.Admision.Api.UseCases.Usuarios.GetTodosUsuario
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class UsuarioController : ControllerBase
+    {
+        private readonly GetTodosUsuarioUseCase _useCase;
+        private readonly IMapper _mapper;
+
+        public UsuarioController(GetTodosUsuarioUseCase useCase, IMapper mapper)
+        {
+            this._useCase = useCase;
+            this._mapper = mapper;
+        }
+
+        [HttpGet("GetTodos")]
+        public IActionResult GetTodos()
+        {
+            return Ok(this._useCase.Execute());
+        }
+    }
+}
