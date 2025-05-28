@@ -18,6 +18,6 @@ namespace Oper.Admision.Domain.IRepositories
         Task<List<Socio>> ObtenerCumpleañerosDeHoyAsync();
         Task<List<Socio>> ObtenerTodosAsync();
         Task<Socio> GetByDniAsync(string dni);
-
+        Task EliminarAsync(int id);
     }
 }

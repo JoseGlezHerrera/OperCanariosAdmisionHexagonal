@@ -111,6 +111,13 @@ namespace Oper.Admision.Infrastructure.Repositories
             return await _context.Socios
                 .FirstOrDefaultAsync(s => s.dni == dni);
         }
+        public async Task EliminarAsync (int id)
+        {
+            var socio = await _context.Socios.FindAsync(id);
+            if (socio == null) return;
+            _context.Socios.Remove(socio);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 
