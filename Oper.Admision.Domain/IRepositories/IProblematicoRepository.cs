@@ -17,5 +17,6 @@ namespace Oper.Admision.Domain.IRepositories
         Task<Problematico?> GetByIdAsync(int id);
         Task UpdateAsync(Problematico problematico);
         Task EliminarAsync(Problematico problematico);
+        Task<List<ProblematicoVista>> FiltrarPorTipoAsync(string tipo);
     }
 }

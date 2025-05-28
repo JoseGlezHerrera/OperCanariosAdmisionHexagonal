@@ -1,22 +1,18 @@
 ﻿using AutoMapper;
+using Oper.Admision.Application.UseCases.Sesiones;
 using Oper.Admision.Application.UseCases.Sesiones.CrearSesion;
-using Oper.Admision.Application.UseCases.Socios.CrearSocio;
 using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Oper.Admision.Application.UseCases.Sesiones
+namespace Oper.Admision.Api.UseCases.Sesiones.CrearSesion
 {
     public class CrearSesionMapping : Profile
     {
         public CrearSesionMapping()
         {
+            CreateMap<CrearSesionRequest, CrearSesionInput>();
+            CreateMap<CrearSesionInput, Sesion>()
+                .ForMember(dest => dest.sede, opt => opt.Ignore());
             CreateMap<Sesion, CrearSesionOutput>();
-            CreateMap<CrearSesionOutput, Sesion>();
-            CreateMap<CrearSesionInput, Sesion>();
         }
     }
 }

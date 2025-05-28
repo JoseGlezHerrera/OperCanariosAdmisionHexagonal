@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
+﻿namespace Oper.Admision.Api.UseCases.Socios.CrearSocio
 {
-    public class CrearSocioInput
+    public class CrearSocioRequest
     {
         public string nombre { get; set; }
         public string apel1 { get; set; }
@@ -15,8 +9,6 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
         public string calle { get; set; }
         public string telefono { get; set; }
         public string comentario { get; set; }
-        public string foto { get; set; }
-
 
     }
 }

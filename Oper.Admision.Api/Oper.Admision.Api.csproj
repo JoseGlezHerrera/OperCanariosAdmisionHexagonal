@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="UsesCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
-    <Compile Remove="UsesCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
-    <Compile Remove="UsesCases\Usuarios\GetEnlaces\UsuarioController.cs" />
+    <Compile Remove="UseCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
+    <Compile Remove="UseCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
+    <Compile Remove="UseCases\Usuarios\GetEnlaces\UsuarioController.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="UsesCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
-    <None Include="UsesCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
-    <None Include="UsesCases\Usuarios\GetEnlaces\UsuarioController.cs" />
+    <None Include="UseCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
+    <None Include="UseCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
+    <None Include="UseCases\Usuarios\GetEnlaces\UsuarioController.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +34,6 @@
     <ProjectReference Include="..\Oper.Admision.Application\Oper.Admision.Application.csproj" />
     <ProjectReference Include="..\Oper.Admision.Domain\Oper.Admision.Domain.csproj" />
     <ProjectReference Include="..\Oper.Admision.Infrastructure\Oper.Admision.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UsesCases\Problematicos\FiltrarProblematicoPorTipo\" />
   </ItemGroup>
 
 </Project>

@@ -35,22 +35,24 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Login
         {
             Validate(input);
 
-
-            var usuario = this._usuarioRepository.Login(input.Nombre, input.Password);
+            var usuario = _usuarioRepository.Login(input.Nombre, input.Password);
             if (usuario == null)
-                _logger.LogWarning("Intento fallido de login con el nombre: {Nombre}", input.Nombre);
-
-            return new LoginUsuarioOutput
             {
-                Succeeded = false,
-                Mensaje = $"El usuario con nombre '{input.Nombre}' no fue encontrado o la contraseña es incorrecta",
-                Errores = new List<string> { "Credenciales inválidas" }
-            };
+                _logger.LogWarning("Intento fallido de login con el nombre: {Nombre}", input.Nombre);
+                return new LoginUsuarioOutput
+                {
+                    Succeeded = false,
+                    Mensaje = $"El usuario con nombre '{input.Nombre}' no fue encontrado o la contraseña es incorrecta",
+                    Errores = new List<string> { "Credenciales inválidas" }
+                };
+            }
             return BuildOutPut(usuario);
         }
         private LoginUsuarioOutput BuildOutPut(Domain.Models.Usuario entidad)
         {
+            _logger.LogInformation("🟨 Usuario recibido del repositorio: {@entidad}", entidad);
             var resultado = _mapper.Map<Domain.Models.Usuario, LoginUsuarioOutput>(entidad);
+            _logger.LogInformation("🟩 Resultado del mapping: {@resultado}", resultado);
             resultado.Succeeded = true;
             resultado.Mensaje = "Login correcto";
             return resultado;

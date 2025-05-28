@@ -74,17 +74,23 @@ namespace Oper.Admision.Infrastructure.Repositories
             _logger.LogDebug("Intentando iniciar sesión con Nombre: {Nombre}, Password Encriptado: {PasswordEncriptado}", nombre, passwordEncriptado);
 
             var usuario = this._context.Usuarios
-                .FirstOrDefault(u => u.Nombre == nombre && u.Password == passwordEncriptado);
-
+                .AsNoTracking()
+                .Where(u => u.Nombre == nombre && u.Password == passwordEncriptado && !u.Eliminado)
+                .Select(u => new Usuario
+                {
+                    UsuarioId = u.UsuarioId,
+                    Nombre = u.Nombre,
+                    Alias = u.Alias,
+                    RolId = u.RolId ?? 0,
+                    Password = "",
+                })
+                .FirstOrDefault();
             if (usuario == null)
             {
-                _logger.LogWarning("No se encontró el usuario con Nombre: {Nombre} y Password Encriptado: {PasswordEncriptado}", nombre, passwordEncriptado);
+                _logger.LogWarning("No se encontró el usuario con Nombre: {Nombre}", nombre);
             }
-
             return usuario;
         }
-
-
         public Usuario? Get(string email)
         {
             if (this.ExisteEmail(email))

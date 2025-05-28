@@ -36,7 +36,6 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
             if (_socioRepository.ExisteNombre(null, input.dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.dni));
 
             if (string.IsNullOrEmpty(input.dni)) throw new ArgumentInputException(Mensaje.Requerido("dni"));
-            if (input.id_socio == 0) throw new ArgumentInputException(Mensaje.Requerido("id_socio"));
             if (string.IsNullOrEmpty(input.nombre)) throw new ArgumentInputException(Mensaje.Requerido("nombre"));
             if (string.IsNullOrEmpty(input.calle)) throw new ArgumentInputException(Mensaje.Requerido("calle"));
             if (string.IsNullOrEmpty(input.dni)) throw new ArgumentInputException(Mensaje.Requerido("telefono"));

@@ -88,5 +88,37 @@ namespace Oper.Admision.Infrastructure.Repositories
             _context.Problematicos.Remove(problematico);
             await _context.SaveChangesAsync();
         }
+        public async Task<List<ProblematicoVista>> FiltrarPorTipoAsync(string tipo)
+        {
+            var tipoNormalizado = tipo.ToLower();
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append("Select problematicos.regla AS Regla, problematicos.comentario AS Comentario, ");
+            consulta.Append("CASE WHEN problematicos.gobcan = 1 THEN 1 ");
+            consulta.Append("WHEN problematicos.prohibida_entrada = 1 THEN 2 ");
+            consulta.Append("WHEN problematicos.conflictivo = 1 THEN 3 ");
+            consulta.Append("ELSE 0 END AS TipoProblematico, ");
+            consulta.Append("socios.dni AS Dni, problematicos.fecha_crea AS FechaCreacion ");
+            consulta.Append("FROM problematicos ");
+            consulta.Append("LEFT JOIN socios ON socios.id_socio = problematicos.id_socio ");
+            consulta.Append("WHERE ");
+
+            switch(tipoNormalizado)
+            {
+                case "conflictivo":
+                    consulta.Append("problematicos.conflictivo = 1 ");
+                    break;
+                case "prohibidaentrada":
+                    consulta.Append("problematicos.prohibida_entrada = 1 ");
+                    break;
+                case "gobcan":
+                    consulta.Append("problematicos.gobcan = 1 ");
+                    break;
+                default:
+                    return new List<ProblematicoVista>(); // La consulta no es válida, retornar lista vacía
+            }
+            consulta.Append("ORDER BY problematicos.fecha_crea DESC");
+            return await _context.ProblematicoVista.FromSqlRaw(consulta.ToString()).ToListAsync();
+
+        }
     }
 }

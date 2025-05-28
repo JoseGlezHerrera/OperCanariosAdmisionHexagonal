@@ -1,24 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Oper.Admision.Domain.Models
+﻿namespace Oper.Admision.Api.UseCases.Sesiones.CrearSesion
 {
-    [Table("sesiones")]
-    public class Sesion
+    public class CrearSesionResponse
     {
-        [Key]
         public int id_sesion { get; set; }
-
         public DateTime fecha_inicio { get; set; }
+
         public int hombres { get; set; }
         public int mujeres { get; set; }
         public int nuevos { get; set; }
         public int habituales { get; set; }
         public DateTime fecha_fin { get; set; }
-
         public int id_sede { get; set; }
 
-        [ForeignKey("id_sede")]
-        public virtual Sede sede { get; set; }
+        // public virtual Sede sede { get; set; }
     }
 }

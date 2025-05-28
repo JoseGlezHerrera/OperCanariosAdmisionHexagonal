@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain;
+using Oper.Admision.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,9 @@ namespace Oper.Admision.Application.UseCases.Sesiones.GetSesion
             return this.BuildOutPut(entidades);
         }
 
-        private ICollection<GetSesionOutput> BuildOutPut(ICollection<Domain.Models.Sesion> sesions)
+        private ICollection<GetSesionOutput> BuildOutPut(ICollection<Sesion> sessions)
         {
-            var resultado = this._mapper.Map<ICollection<Domain.Models.Sesion>, ICollection<GetSesionOutput>>(sesions);
+            var resultado = this._mapper.Map<ICollection<Sesion>, ICollection<GetSesionOutput>>(sessions);
             return resultado;
         }
     }

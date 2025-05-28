@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Oper.Admision.Application.UseCases.Sesiones
+﻿namespace Oper.Admision.Application.UseCases.Sesiones.CrearSesion
 {
-    public class CrearSesionInput
+    public class CrearSesionRequest
     {
         public DateTime fecha_inicio { get; set; }
         public int hombres { get; set; }

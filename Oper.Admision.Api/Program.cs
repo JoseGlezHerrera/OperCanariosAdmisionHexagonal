@@ -2,153 +2,136 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.IdentityModel.Tokens;
-using Oper.Admision.Domain.Logs;
 using Oper.Admision.Api;
 using Oper.Admision.Api.Configuracion;
 using Oper.Admision.Api.Middlewares;
-using Serilog;
-using System.Text;
+using Oper.Admision.Application;
+using Oper.Admision.Domain.IRepositories;
+using Oper.Admision.Domain.Logs;
 using Oper.Admision.Infrastructure;
 using Oper.Admision.Infrastructure.Correo;
-using Oper.Admision.Application;
-using Microsoft.AspNetCore.Components.Forms;
-using Oper.Admision.Application.UseCases.Usuarios.Crear;
-using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Infrastructure.Repositories;
-using Oper.Admision.Application.UseCases.Socios;
-using Oper.Admision.Application.UseCases.Socios.GetSocio;
+using Serilog;
+using System.Text;
 using AutoMapper;
-using Oper.Admision.Api.UsesCases.Problematicos;
-using Oper.Admision.Domain.Models;
-using Oper.Admision.Application.UseCases.Problematico.CrearProblematico;
-using Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
-using Oper.Admision.Api.UsesCases.Problematicos.ObtenerProblematicoID;
-using Oper.Admision.Application.UseCases.Problematico.ActualizarProblematico;
-using Oper.Admision.Api.UseCases.Problematicos.ActualizarProblematico;
-using Oper.Admision.Application.UseCases.Problematico.EliminarProblematico;
 
-string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+// Mappings
+using Oper.Admision.Api.UseCases.Usuarios.LoginUsuario;
+using Oper.Admision.Api.UseCases.Problematicos.ActualizarProblematico;
+//CrearProblematico
+using Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
+
+// UseCases
+using Oper.Admision.Application.UseCases.Problematico.ActualizarProblematico;
+//Crear Problematico
+using Oper.Admision.Application.UseCases.Problematico.EliminarProblematico;
+using Oper.Admision.Application.UseCases.Problematico.FiltrarProblematicoPorTipo;
+using Oper.Admision.Application.UseCases.Socios.GetSocio;
+using Oper.Admision.Application.UseCases.Socios;
+using Oper.Admision.Application.UseCases.Usuarios.Crear;
+using Oper.Admision.Application.UseCases.Usuarios.Login;
+//using Oper.Admision.Api.UsesCases.Problematicos.ObtenerProblematicoID;
+//using Oper.Admision.Api.UsesCases.Problematicos;
+using Log = Serilog.Log;
+
+//Visitas
+using Oper.Admision.Application.UseCases.Visitas.CrearVisita;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-IConfiguration configuration = builder.Configuration;
+var configuration = builder.Configuration;
 var services = builder.Services;
 
-Serilog.Log.Logger = new LoggerConfiguration()
-              .Enrich.FromLogContext()
-              .WriteTo.Console()
-              .ReadFrom.Configuration(configuration)
-              .CreateLogger();
+// Logger
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
 
-Serilog.Log.Information("Arranque servidor asp.net");
+Log.Information("Arranque servidor ASP.NET");
 
+// JSON cycles + CORS
+services.AddControllers().AddJsonOptions(opt =>
+    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
-
-builder.Services.AddControllers()
-      .AddJsonOptions(options =>
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
-
-builder.Services.AddCors(options =>
+services.AddCors(options =>
 {
-
-    options.AddPolicy(MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.AllowAnyOrigin()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                      });
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
 });
 
+// Swagger
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-services.Configure<IISServerOptions>(options => {
-    options.MaxRequestBodySize = int.MaxValue;
-});
-
-services.Configure<KestrelServerOptions>(options => {
-    options.Limits.MaxRequestBodySize = int.MaxValue;
-});
-
+// Form limits
 services.Configure<FormOptions>(options =>
 {
     options.ValueLengthLimit = int.MaxValue;
-    options.MultipartBodyLengthLimit = int.MaxValue; // if don't set default value is: 128 MB
+    options.MultipartBodyLengthLimit = int.MaxValue;
     options.MultipartHeadersLengthLimit = int.MaxValue;
 });
+services.Configure<IISServerOptions>(o => o.MaxRequestBodySize = int.MaxValue);
+services.Configure<KestrelServerOptions>(o => o.Limits.MaxRequestBodySize = int.MaxValue);
 
-var mapperConfig = new MapperConfiguration(cfg =>
-{
-    // CrearProblematico
-    CrearProblematicoMapping.Configure(cfg);
-    // ObtenerProblematico
-    ObtenerProblematicoMapping.Configure(cfg);
-    //ActualizarProblematico
-    ActualizarProblematicoMapping.Configure(cfg);
-});
+// Mapper (registra todos los Profiles de AutoMapper automáticamente)
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllers().AddApplicationPart(typeof(ObtenerProblematicoPorIdController).Assembly);
 
-var mapper = mapperConfig.CreateMapper();
-builder.Services.AddSingleton(mapper);
-
-
+// Authentication
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters()
-                   {
-                       ValidateIssuer = true,
-                       ValidateAudience = true,
-                       ValidateLifetime = true,
-                       ValidateIssuerSigningKey = true,
-                       ValidIssuer = configuration["JWT:Issuer"],
-                       ValidAudience = configuration["JWT:Audience"],
-                       IssuerSigningKey = new SymmetricSecurityKey(
-                           Encoding.UTF8.GetBytes(configuration["JWT:ClaveSecreta"])
-                       )
-                   };
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = configuration["JWT:Issuer"],
+            ValidAudience = configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:ClaveSecreta"]))
+        };
+    });
 
-               });
-
+// Config y capas
 services.Configure<Dominio>(configuration.GetSection("Dominio"));
 services.Configure<ConfigCorreo>(configuration.GetSection("ConfigCorreo"));
-services.AddScoped<IUsuarioApi, UsuarioApi>();
-services.AddAutoMapper(typeof(EditarUsuarioMapping));
 services.AddApiLayer(configuration);
-
 services.AddInfrastructureLayer(configuration);
 services.AddApplicationLayer();
 
-services.AddControllers()
-        //.AddNewtonsoftJson()
-        ;
+// Dependencias manuales
+services.AddScoped<IUsuarioApi, UsuarioApi>();
 services.AddScoped<IVisitaRepository, VisitaRepository>();
 services.AddScoped<ISesionRepository, SesionRepository>();
-///////////////////////////////////////////////////////////////////////////
-//Builders Agregados
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<ISocioRepository, SocioRepository>();
-builder.Services.AddScoped<ObtenerCumpleañerosUseCase>();
-builder.Services.AddScoped<GetTodosSociosUseCase>();
-builder.Services.AddScoped<IProblematicoRepository, ProblematicoRepository>();
-builder.Services.AddScoped<CrearProblematicoUseCase>();
-builder.Services.AddScoped<IProblematicoRepository, ProblematicoRepository>();
-builder.Services.AddScoped<CrearProblematicoUseCase>();
-builder.Services.AddScoped<ObtenerProblematicoPorIdUseCase>();
-builder.Services.AddScoped<ActualizarProblematicoUseCase>();
-builder.Services.AddScoped<CrearUsuarioUseCase>();
-builder.Services.AddScoped<EliminarProblematicoUseCase>();
+services.AddScoped<ISocioRepository, SocioRepository>();
+services.AddScoped<IProblematicoRepository, ProblematicoRepository>();
+
+// UseCases
+services.AddScoped<GetTodosSociosUseCase>();
+services.AddScoped<ObtenerCumpleañerosUseCase>();
+services.AddScoped<GetSocioUseCase>();
+services.AddScoped<CrearProblematicoUseCase>();
+services.AddScoped<ObtenerProblematicoPorIdUseCase>();
+services.AddScoped<ActualizarProblematicoUseCase>();
+services.AddScoped<EliminarProblematicoUseCase>();
+services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
+services.AddScoped<CrearUsuarioUseCase>();
+services.AddScoped<LoginUsuarioUseCase>();
+
+
 var app = builder.Build();
 
+// Middleware ordenado
+app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<ExpiracionSesionApiMiddleware>();
+app.UseMiddleware<UsuarioApiMiddleware>();
 
-app.UseMiddleware(typeof(ErrorHandlerMiddleware));
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -157,23 +140,13 @@ if (app.Environment.IsDevelopment())
 
 if (app.Environment.IsProduction())
 {
-    builder.WebHost.UseUrls(builder.Configuration.GetSection("Dominio").Get<Dominio>().Produccion);
+    builder.WebHost.UseUrls(configuration.GetSection("Dominio").Get<Dominio>().Produccion);
 }
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
-
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
-app.UseMiddleware(typeof(ExpiracionSesionApiMiddleware));
-
-app.UseMiddleware(typeof(UsuarioApiMiddleware));
-
-
-
 app.Run();
