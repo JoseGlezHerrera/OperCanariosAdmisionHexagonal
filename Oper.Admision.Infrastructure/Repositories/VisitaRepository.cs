@@ -1,77 +1,68 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Oper.Admision.Infrastructure;
 
 namespace Oper.Admision.Infrastructure.Repositories
 {
     public class VisitaRepository : IVisitaRepository
     {
         private readonly GestionContext _context;
-        private readonly ILogger<VisitaRepository> _logger;
 
-        public VisitaRepository(GestionContext context, ILogger<VisitaRepository> logger)
+        public VisitaRepository(GestionContext context)
         {
-            this._context = context;
-            this._logger = logger;
+            _context = context;
         }
 
-        public void Create(Visita visita)
+        public async Task<Visita?> ObtenerPorIdAsync(int id)
         {
-            this._context.Visita.Add(visita);
+            return await _context.Visita.FindAsync(id);
         }
 
-        public void Delete(int id_visita)
+        public async Task<List<Visita>> ObtenerPorSocioIdAsync(int socioId)
         {
-            var entidad = this.Get(id_visita);
-            //entidad.Eliminado = true;
-            this._context.Entry(entidad).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
+            return await _context.Visita
+                .Where(v => v.id_socio == socioId)
+                .ToListAsync();
         }
 
-        public Visita Get(int id_visita)
+        public async Task AgregarAsync(Visita visita)
         {
-            return this._context.Visita
-                .Where(u => u.id_visita == id_visita)
-                .Select(u => new Visita
-                {
-                    id_visita = u.id_visita,
-                    id_socio = u.id_socio,
-                    id_sesion = u.id_sesion,
-                    id_sede = u.id_sede,
-                    fecha_hora = u.fecha_hora
-                })
-                .FirstOrDefault();
+            try
+            {
+                _context.Visita.Add(visita);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("⚠️ Error al guardar Visita: " + ex.InnerException?.Message ?? ex.Message);
+                throw;
+            }
         }
 
-        public ICollection<Visita> GetAll()
+        public async Task EliminarAsync(int id)
         {
-            return this._context.Visita
-                .Select(u => new Visita
-                {
-                    id_visita = u.id_visita,
-                    id_socio = u.id_socio,
-                    id_sesion = u.id_sesion,
-                    id_sede = u.id_sede,
-                    fecha_hora = u.fecha_hora
-                })
-                .ToList();
+            var visita = await _context.Visita.FindAsync(id);
+            if (visita != null)
+            {
+                _context.Visita.Remove(visita);
+                await _context.SaveChangesAsync();
+            }
         }
-
-        public void Update(Visita visita)
+        public async Task<List<Visita>> ObtenerTodasAsync()
         {
-            this._context.Entry(visita).State = EntityState.Modified;
+            return await _context.Visita.ToListAsync();
         }
-
-        Socio IVisitaRepository.Get(int id_visita)
+        public async Task ActualizarAsync (Visita visita)
         {
-            throw new NotImplementedException();
+            var entidadExistente = await _context.Visita.FindAsync(visita.id_visita);
+            if (entidadExistente == null)
+                throw new Exception("Visita a actualizar no encontrada");
+            entidadExistente.fecha_hora = visita.fecha_hora;
+            entidadExistente.id_sesion = visita.id_sesion;
+            entidadExistente.motivo = visita.motivo;
+            _context.Visita.Update(entidadExistente);
+            await _context.SaveChangesAsync();
         }
     }
-
 }

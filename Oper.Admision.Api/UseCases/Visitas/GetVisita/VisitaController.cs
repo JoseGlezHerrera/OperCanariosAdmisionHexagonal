@@ -22,7 +22,7 @@ namespace Oper.Admision.Api.UseCases.Visitas.GetVisita
 
         public IActionResult GetVisitas()
         {
-            return Ok(this._useCase.Execute());
+            return Ok(this._useCase.ExecuteAsync());
         }
 
     }

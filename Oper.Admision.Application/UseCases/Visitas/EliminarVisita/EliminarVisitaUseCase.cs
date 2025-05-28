@@ -31,12 +31,5 @@ namespace Oper.Admision.Application.UseCases.Visitas.EliminarVisita
             if (input == null) throw new ArgumentInputException(Mensaje.Usuario_Input);
             if (input.id_visita == 0) throw new ArgumentInputException(Mensaje.Requerido("id_visita"));
         }
-
-        public void Execute(EliminarVisitaInput input)
-        {
-            Validate(input);
-            this._visitaRepository.Delete(input.id_visita);
-            this._uow.Save();
-        }
     }
 }

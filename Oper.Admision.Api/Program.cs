@@ -38,6 +38,10 @@ using Log = Serilog.Log;
 using Oper.Admision.Application.UseCases.Visitas.CrearVisita;
 using Oper.Admision.Application.UseCases.Socios.EliminarSocio;
 using Oper.Admision.Application.UseCases.Socios.ObtenerSocioPorId;
+using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
+using Oper.Admision.Application.UseCases.Visitas.ActualizarVisita;
+using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
+using Oper.Admision.Api.UseCases.Visitas.ObtenerVisitaPorId;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,9 +87,15 @@ services.Configure<KestrelServerOptions>(o => o.Limits.MaxRequestBodySize = int.
 // Mapper (registra todos los Profiles de AutoMapper automáticamente)
 builder.Services.AddScoped<EliminarSocioUseCase>();
 builder.Services.AddScoped<ObtenerSocioPorIdUseCase>();
-//
+builder.Services.AddScoped<ListarVisitasPorSocioUseCase>();
+builder.Services.AddScoped<CrearVisitaUseCase>();
+builder.Services.AddScoped<ActualizarVisitaUseCase>();
+builder.Services.AddScoped<ObtenerVisitaPorIdUseCase>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllers().AddApplicationPart(typeof(ObtenerProblematicoPorIdController).Assembly);
+builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(ObtenerVisitaPorIdMapping));
+
 
 // Authentication
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -1,18 +1,9 @@
-﻿namespace Oper.Admision.Api.UseCases.Visitas.CrearVisita
+﻿namespace Oper.Admision.Api.UseCases.Visitas.CrearVisita;
+
+public class CrearVisitaResponse
 {
-    internal class CrearVisitaResponse
-    {
-        public int id_visita { get; set; }
-
-        public int id_socio { get; set; }
-        public int? id_sesion { get; set; }
-        public int? id_sede { get; set; }
-        public DateTime fecha_hora { get; set; }
-
-        public CrearVisitaResponse()
-        {
-            this.fecha_hora = DateTime.Now;
-        }
-
-    }
+    public int Id { get; set; }
+    public DateTime Fecha { get; set; }
+    public string? Motivo { get; set; }
+    public int SocioId { get; set; }
 }

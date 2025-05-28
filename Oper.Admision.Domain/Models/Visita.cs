@@ -19,7 +19,7 @@ namespace Oper.Admision.Domain.Models
         public int id_socio { get; set; }
 
         public DateTime fecha_hora { get; set; }
-
+        public string? motivo { get; set; }
         public virtual Sesion Sesion { get; set; }
     }
 }

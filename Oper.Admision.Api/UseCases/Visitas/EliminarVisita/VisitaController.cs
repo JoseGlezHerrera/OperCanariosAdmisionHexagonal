@@ -16,12 +16,12 @@ namespace Oper.Admision.Api.UseCases.Visitas.EliminarVisita
             this._useCase = useCase;
         }
 
-        [HttpDelete("{id_visita}")]
+        /*[HttpDelete("{id_visita}")]
         public IActionResult Eliminar(int id_visita)
         {
             var input = new EliminarVisitaInput { id_visita = id_visita };
             _useCase.Execute(input);
             return NoContent();
-        }
+        }*/
     }
 }

@@ -25,9 +25,9 @@ namespace Oper.Admision.Application.UseCases.Visitas.GetVisita
             this._mapper = mapper;
         }
 
-        public ICollection<GetVisitaOutPut> Execute()
+        public async Task<ICollection<GetVisitaOutPut>> ExecuteAsync()
         {
-            var entidades = this._VisitaRepository.GetAll();
+            var entidades = await this._VisitaRepository.ObtenerTodasAsync();
             this._logger.LogInformation($"Get Visitas- Nº: {entidades.Count}");
             return this.BuildOutPut(entidades);
         }
