@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Oper.Admision.Application.UseCases.Socios.ObtenerSocioPorId
 {
-    class ObtenerSocioPorIdInput
+    public class ObtenerSocioPorIdInput
     {
+        public int Id { get; }
+        public ObtenerSocioPorIdInput(int id)
+        {
+            Id = id;
+        }
     }
 }

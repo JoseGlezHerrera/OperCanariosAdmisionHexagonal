@@ -118,6 +118,11 @@ namespace Oper.Admision.Infrastructure.Repositories
             _context.Socios.Remove(socio);
             await _context.SaveChangesAsync();
         }
+        public async Task<Socio?> ObtenerPorIdAsync(int id)
+        {
+            return await _context.Socios.FindAsync(id);
+        }
+
     }
 }
 

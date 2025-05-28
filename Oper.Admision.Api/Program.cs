@@ -37,6 +37,7 @@ using Log = Serilog.Log;
 //Visitas
 using Oper.Admision.Application.UseCases.Visitas.CrearVisita;
 using Oper.Admision.Application.UseCases.Socios.EliminarSocio;
+using Oper.Admision.Application.UseCases.Socios.ObtenerSocioPorId;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,8 @@ services.Configure<KestrelServerOptions>(o => o.Limits.MaxRequestBodySize = int.
 
 // Mapper (registra todos los Profiles de AutoMapper automáticamente)
 builder.Services.AddScoped<EliminarSocioUseCase>();
+builder.Services.AddScoped<ObtenerSocioPorIdUseCase>();
+//
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers().AddApplicationPart(typeof(ObtenerProblematicoPorIdController).Assembly);
 
