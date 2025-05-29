@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Oper.Admision.Application.UseCases.Usuarios.GetTodos;
+using Oper.Admision.Domain.Models;
 
-namespace Oper.Admision.Api.UseCases.Usuarios.GetTodosUsuario
+public class GetTodosUsuarioMapping : Profile
 {
-    public class GetTodosUsuarioMapping : Profile
+    public GetTodosUsuarioMapping()
     {
-        public GetTodosUsuarioMapping()
-        {
-            CreateMap<GetTodosUsuarioOutput, GetTodosUsuarioResponse>();
-        }
+        CreateMap<Usuario, GetTodosUsuarioOutput>();
     }
 }

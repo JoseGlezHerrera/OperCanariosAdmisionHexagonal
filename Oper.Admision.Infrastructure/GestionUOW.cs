@@ -53,6 +53,10 @@ namespace Oper.Admision.Infrastructure
                 this._context.DisposeAsync();
             }
         }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

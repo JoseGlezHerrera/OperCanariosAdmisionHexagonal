@@ -9,15 +9,11 @@ namespace Oper.Admision.Domain.Models
     {
         [Key]
         public int id_visita { get; set; }
-
         [Column("id_sesion")]
         [ForeignKey(nameof(Sesion))]
         public int id_sesion { get; set; }
-
         public int? id_sede { get; set; }
-
         public int id_socio { get; set; }
-
         public DateTime fecha_hora { get; set; }
         public string? motivo { get; set; }
         public virtual Sesion Sesion { get; set; }

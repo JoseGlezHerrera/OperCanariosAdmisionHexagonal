@@ -5,17 +5,17 @@ using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
 namespace Oper.Admision.Api.UseCases.Visitas.ObtenerVisitaPorId
 {
     [ApiController]
-    [Route("api/visitas/[controller]")]
+    [Route("api/visitas")]
     public class ObtenerVisitaPorIdController : ControllerBase
     {
         private readonly ObtenerVisitaPorIdUseCase _useCase;
+
         public ObtenerVisitaPorIdController(ObtenerVisitaPorIdUseCase useCase)
         {
-
             _useCase = useCase;
-            
         }
-        [HttpGet("{id}")]
+
+        [HttpGet("por-id/{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var input = new ObtenerVisitaPorIdInput(id);

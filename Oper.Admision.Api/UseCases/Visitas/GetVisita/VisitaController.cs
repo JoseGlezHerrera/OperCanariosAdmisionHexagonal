@@ -19,11 +19,10 @@ namespace Oper.Admision.Api.UseCases.Visitas.GetVisita
         }
 
         [HttpGet("GetVisitas")]
-
-        public IActionResult GetVisitas()
+        public async Task<IActionResult> GetVisitas()
         {
-            return Ok(this._useCase.ExecuteAsync());
+            var resultado = await _useCase.ExecuteAsync();
+            return Ok(resultado);
         }
-
     }
 }

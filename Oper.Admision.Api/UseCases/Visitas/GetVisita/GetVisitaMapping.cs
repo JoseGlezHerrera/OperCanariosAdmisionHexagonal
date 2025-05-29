@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using Oper.Admision.Application.UseCases.Visitas.GetVisita;
 
-namespace Oper.Admision.Api.UseCases.Visitas.GetVisita
+using Oper.Admision.Application.UseCases.Visitas.GetVisita;
+using Oper.Admision.Domain.Models;
+
+public class GetVisitaMapping : Profile
 {
-    public class GetVisitaMapping : Profile
+    public GetVisitaMapping()
     {
-      
-            public GetVisitaMapping()
-            {
-                CreateMap<GetVisitaOutPut, GetVisitaResponse>();
-            }
-        
+        CreateMap<Visita, GetVisitaOutPut>();
     }
-    
 }

@@ -73,6 +73,9 @@ namespace Oper.Admision.Infrastructure.Repositories
                 .Where(v => v.fecha_hora >= fechaInicio && v.fecha_hora < fechaFin)
                 .ToListAsync();
         }
-
+        public async Task InsertAsync(Visita visita)
+        {
+            await _context.Visita.AddAsync(visita);
+        }
     }
 }

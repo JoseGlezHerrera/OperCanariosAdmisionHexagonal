@@ -9,12 +9,11 @@ namespace Oper.Admision.Application.UseCases.Visitas.CrearVisita
     public class CrearVisitaOutput
     {
         public int id_visita { get; set; }
-
         public int id_socio { get; set; }
         public int? id_sesion { get; set; }
         public int? id_sede { get; set; }
         public DateTime fecha_hora { get; set; }
-
+        public string? motivo { get; set; }
         public CrearVisitaOutput()
         {
             this.fecha_hora = DateTime.Now;

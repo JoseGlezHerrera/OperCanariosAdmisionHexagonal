@@ -12,5 +12,6 @@ namespace Oper.Admision.Domain
         void Commit();
         void RollBack();
         int Save();
+        Task SaveChangesAsync();
     }
 }
