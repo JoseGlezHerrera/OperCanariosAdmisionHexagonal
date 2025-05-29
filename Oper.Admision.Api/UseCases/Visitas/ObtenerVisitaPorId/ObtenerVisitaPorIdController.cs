@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Oper.Admision.Application.UseCases.Visita.ObtenerVisitaPorId;
 using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
 
 namespace Oper.Admision.Api.UseCases.Visitas.ObtenerVisitaPorId

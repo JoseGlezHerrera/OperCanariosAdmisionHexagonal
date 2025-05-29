@@ -64,5 +64,15 @@ namespace Oper.Admision.Infrastructure.Repositories
             _context.Visita.Update(entidadExistente);
             await _context.SaveChangesAsync();
         }
+        public async Task<List<Visita>> ObtenerPorFechaAsync(DateTime fecha)
+        {
+            var fechaInicio = fecha.Date;
+            var fechaFin = fecha.Date.AddDays(1);
+
+            return await _context.Visita
+                .Where(v => v.fecha_hora >= fechaInicio && v.fecha_hora < fechaFin)
+                .ToListAsync();
+        }
+
     }
 }

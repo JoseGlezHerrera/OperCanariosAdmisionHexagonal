@@ -1,27 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
-using AutoMapper;
 
 namespace Oper.Admision.Api.UseCases.Visitas.ListarVisitasPorSocio
 {
-    [Route("api/visitas")]
     [ApiController]
+    [Route("api/visitas/[controller]")]
     public class ListarVisitasPorSocioController : ControllerBase
     {
         private readonly ListarVisitasPorSocioUseCase _useCase;
-        private readonly IMapper _mapper;
-        public ListarVisitasPorSocioController(ListarVisitasPorSocioUseCase useCase, IMapper mapper)
+
+        public ListarVisitasPorSocioController(ListarVisitasPorSocioUseCase useCase)
         {
-            _useCase = useCase ?? throw new ArgumentNullException(nameof(useCase));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _useCase = useCase;
         }
-        [HttpGet("por-socio/{socioId}")]
-        public async Task <IActionResult> ListarPorSocio(int socioId)
+
+        [HttpGet("{socioId}")]
+        public async Task<IActionResult> Get(int socioId)
         {
-            var input = new ListarVisitasPorSocioInput(socioId);
-            var visitas = await _useCase.EjecutarAsync(input);
-            var response = _mapper.Map<List<ListarVisitasPorSocioResponse>>(visitas);
-            return Ok(response);
+            var resultado = await _useCase.EjecutarAsync(socioId);
+            return Ok(resultado);
         }
     }
 }

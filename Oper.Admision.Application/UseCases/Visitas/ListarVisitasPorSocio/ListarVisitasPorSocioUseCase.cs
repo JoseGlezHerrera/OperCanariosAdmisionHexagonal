@@ -1,27 +1,25 @@
-﻿using Oper.Admision.Domain.IRepositories;
+﻿using AutoMapper;
+using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
 
 namespace Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio
 {
     public class ListarVisitasPorSocioUseCase
     {
         private readonly IVisitaRepository _visitaRepository;
-        public ListarVisitasPorSocioUseCase(IVisitaRepository visitaRepository)
+        private readonly IMapper _mapper;
+
+        public ListarVisitasPorSocioUseCase(IVisitaRepository visitaRepository, IMapper mapper)
         {
-            _visitaRepository = visitaRepository ?? throw new ArgumentNullException(nameof(visitaRepository));
+            _visitaRepository = visitaRepository;
+            _mapper = mapper;
         }
-        public async Task<List<Visita>>EjecutarAsync (ListarVisitasPorSocioInput input)
+
+        public async Task<List<ListarVisitasPorSocioResponse>> EjecutarAsync(int socioId)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input), "El input no puede ser nulo.");
-            }
-            return await _visitaRepository.ObtenerPorSocioIdAsync(input.SocioId);
+            var visitas = await _visitaRepository.ObtenerPorSocioIdAsync(socioId);
+            return _mapper.Map<List<ListarVisitasPorSocioResponse>>(visitas);
         }
     }
 }

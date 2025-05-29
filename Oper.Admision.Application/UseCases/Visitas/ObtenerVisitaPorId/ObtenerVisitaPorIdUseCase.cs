@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
+using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
 using Oper.Admision.Domain.IRepositories;
-using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DominioVisita = Oper.Admision.Domain.Models.Visita;
 
-namespace Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId
+namespace Oper.Admision.Application.UseCases.Visita.ObtenerVisitaPorId
 {
     public class ObtenerVisitaPorIdUseCase
     {
         private readonly IVisitaRepository _visitaRepository;
         private readonly IMapper _mapper;
+
         public ObtenerVisitaPorIdUseCase(IVisitaRepository visitaRepository, IMapper mapper)
         {
             _visitaRepository = visitaRepository;
             _mapper = mapper;
         }
+
         public async Task<ObtenerVisitaPorIdResponse?> EjecutarAsync(ObtenerVisitaPorIdInput input)
         {
-            Visita? visita = await _visitaRepository.ObtenerPorIdAsync(input.Id);
-            if (visita == null)
+            DominioVisita? visita = await _visitaRepository.ObtenerPorIdAsync(input.Id);
+
+            if (visita is null)
                 return null;
+
             return _mapper.Map<ObtenerVisitaPorIdResponse>(visita);
         }
     }

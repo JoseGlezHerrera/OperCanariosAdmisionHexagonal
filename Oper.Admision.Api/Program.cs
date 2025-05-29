@@ -42,6 +42,10 @@ using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
 using Oper.Admision.Application.UseCases.Visitas.ActualizarVisita;
 using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
 using Oper.Admision.Api.UseCases.Visitas.ObtenerVisitaPorId;
+using Oper.Admision.Application.UseCases.Visita.EliminarVisita;
+using Oper.Admision.Application.UseCases.Visita.ObtenerVisitaPorId;
+using Oper.Admision.Api.UseCases.Visitas.ObtenerVisitasPorFecha;
+using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitasPorFecha;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,16 +89,20 @@ services.Configure<IISServerOptions>(o => o.MaxRequestBodySize = int.MaxValue);
 services.Configure<KestrelServerOptions>(o => o.Limits.MaxRequestBodySize = int.MaxValue);
 
 // Mapper (registra todos los Profiles de AutoMapper automáticamente)
+builder.Services.AddScoped<IVisitaRepository, VisitaRepository>();
 builder.Services.AddScoped<EliminarSocioUseCase>();
 builder.Services.AddScoped<ObtenerSocioPorIdUseCase>();
 builder.Services.AddScoped<ListarVisitasPorSocioUseCase>();
 builder.Services.AddScoped<CrearVisitaUseCase>();
 builder.Services.AddScoped<ActualizarVisitaUseCase>();
 builder.Services.AddScoped<ObtenerVisitaPorIdUseCase>();
+builder.Services.AddScoped<EliminarVisitaUseCase>();
+builder.Services.AddScoped<ObtenerVisitasPorFechaUseCase>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(ObtenerVisitaPorIdMapping));
+builder.Services.AddAutoMapper(typeof(ObtenerVisitasPorFechaMapping));
 
 
 // Authentication

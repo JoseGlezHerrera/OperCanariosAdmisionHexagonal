@@ -10,6 +10,6 @@ namespace Oper.Admision.Domain.IRepositories
         Task ActualizarAsync(Visita visita);
         Task EliminarAsync(int id);
         Task<List<Visita>> ObtenerTodasAsync();
-
+        Task<List<Visita>> ObtenerPorFechaAsync(DateTime fecha);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
 using Oper.Admision.Domain.Models;
 
 namespace Oper.Admision.Api.UseCases.Visitas.ListarVisitasPorSocio

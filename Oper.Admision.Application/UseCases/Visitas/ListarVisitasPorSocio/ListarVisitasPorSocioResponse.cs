@@ -1,4 +1,4 @@
-﻿namespace Oper.Admision.Api.UseCases.Visitas.ListarVisitasPorSocio
+﻿namespace Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio
 {
     public class ListarVisitasPorSocioResponse
     {

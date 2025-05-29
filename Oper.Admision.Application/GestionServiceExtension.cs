@@ -30,7 +30,7 @@ namespace Oper.Admision.Application
             services.AddScoped<CrearSesionUseCase>();
             services.AddScoped<CrearSocioUseCase>();
             services.AddScoped<UseCases.Visitas.GetVisita.GetVisitaUseCase>();
-            services.AddScoped<UseCases.Visitas.EliminarVisita.EliminarVisitaUseCase>();
+
             services.AddScoped<ISocioRepository, SocioRepository>();
 
 

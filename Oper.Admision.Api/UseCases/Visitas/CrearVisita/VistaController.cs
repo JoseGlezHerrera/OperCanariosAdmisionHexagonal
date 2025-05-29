@@ -20,7 +20,7 @@ public class CrearVisitaController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CrearVisitaResponse>> Crear([FromBody] CrearVisitaInput input)
     {
-        var visita = await _useCase.EjecutarAsync(input);
+        var visita =  _useCase.EjecutarAsync(input);
         var response = _mapper.Map<CrearVisitaResponse>(visita);
         return CreatedAtAction(nameof(Crear), new { id = response.Id }, response);
     }

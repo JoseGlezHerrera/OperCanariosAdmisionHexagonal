@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Oper.Admision.Application.UseCases.Visitas.EliminarVisita
+﻿namespace Oper.Admision.Application.UseCases.Visita.EliminarVisita
 {
     public class EliminarVisitaInput
     {
-        public int id_visita { get; set; }
+        public int Id { get; }
 
+        public EliminarVisitaInput(int id)
+        {
+            Id = id;
+        }
     }
 }

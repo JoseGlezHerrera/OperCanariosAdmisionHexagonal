@@ -1,27 +1,24 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Oper.Admision.Application.UseCases.Visitas.EliminarVisita;
+﻿using Microsoft.AspNetCore.Mvc;
+using Oper.Admision.Application.UseCases.Visita.EliminarVisita;
 
 namespace Oper.Admision.Api.UseCases.Visitas.EliminarVisita
 {
-    [Route("api/[controller]")]
     [ApiController]
-    
-    public class VisitaController : ControllerBase
+    [Route("api/visitas/[controller]")]
+    public class EliminarVisitaController : ControllerBase
     {
         private readonly EliminarVisitaUseCase _useCase;
 
-        public VisitaController(EliminarVisitaUseCase useCase)
+        public EliminarVisitaController(EliminarVisitaUseCase useCase)
         {
-            this._useCase = useCase;
+            _useCase = useCase;
         }
 
-        /*[HttpDelete("{id_visita}")]
-        public IActionResult Eliminar(int id_visita)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var input = new EliminarVisitaInput { id_visita = id_visita };
-            _useCase.Execute(input);
+            await _useCase.EjecutarAsync(new EliminarVisitaInput(id));
             return NoContent();
-        }*/
+        }
     }
 }

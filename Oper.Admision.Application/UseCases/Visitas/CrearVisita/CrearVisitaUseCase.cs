@@ -1,25 +1,24 @@
 ﻿using AutoMapper;
-using Oper.Admision.Application.UseCases.Visitas.CrearVisita;
 using Oper.Admision.Domain.IRepositories;
-using Oper.Admision.Domain.Models;
+using DominioVisita = Oper.Admision.Domain.Models.Visita;
 
-namespace Oper.Admision.Application.UseCases.Visitas.CrearVisita;
-
-public class CrearVisitaUseCase
+namespace Oper.Admision.Application.UseCases.Visitas.CrearVisita
 {
-    private readonly IVisitaRepository _repository;
-    private readonly IMapper _mapper;
-
-    public CrearVisitaUseCase(IVisitaRepository repository, IMapper mapper)
+    public class CrearVisitaUseCase
     {
-        _repository = repository;
-        _mapper = mapper;
-    }
+        private readonly IVisitaRepository _visitaRepository;
+        private readonly IMapper _mapper;
 
-    public async Task<Visita> EjecutarAsync(CrearVisitaInput input)
-    {
-        var entidad = _mapper.Map<Visita>(input);
-        await _repository.AgregarAsync(entidad);
-        return entidad;
+        public CrearVisitaUseCase(IVisitaRepository visitaRepository, IMapper mapper)
+        {
+            _visitaRepository = visitaRepository;
+            _mapper = mapper;
+        }
+
+        public async Task EjecutarAsync(CrearVisitaInput input)
+        {
+            var visita = _mapper.Map<DominioVisita>(input);
+            await _visitaRepository.AgregarAsync(visita);
+        }
     }
 }
