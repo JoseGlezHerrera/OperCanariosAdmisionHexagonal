@@ -47,6 +47,7 @@ using Oper.Admision.Application.UseCases.Visita.ObtenerVisitaPorId;
 using Oper.Admision.Api.UseCases.Visitas.ObtenerVisitasPorFecha;
 using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitasPorFecha;
 using Oper.Admision.Application.UseCases.Socios.GetSocioProhibido;
+using Oper.Admision.Application.UseCases.Visitas.RegistrarVisita;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -100,7 +101,7 @@ builder.Services.AddScoped<ObtenerVisitaPorIdUseCase>();
 builder.Services.AddScoped<ObtenerVisitasPorFechaUseCase>();
 builder.Services.AddScoped<ActualizarProblematicoUseCase>();
 builder.Services.AddScoped<GetSocioProhibidoUseCase>();
-
+builder.Services.AddScoped<RegistrarVisitaUseCase>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();

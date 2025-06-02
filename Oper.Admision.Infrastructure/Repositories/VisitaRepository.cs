@@ -53,7 +53,7 @@ namespace Oper.Admision.Infrastructure.Repositories
         {
             return await _context.Visita.ToListAsync();
         }
-        public async Task ActualizarAsync (Visita visita)
+        public async Task ActualizarAsync(Visita visita)
         {
             var entidadExistente = await _context.Visita.FindAsync(visita.id_visita);
             if (entidadExistente == null)
@@ -76,6 +76,23 @@ namespace Oper.Admision.Infrastructure.Repositories
         public async Task InsertAsync(Visita visita)
         {
             await _context.Visita.AddAsync(visita);
+        }
+        public bool ExisteVisita(int socioId, int sesionId)
+        {
+            return _context.Visita.Any(v => v.id_socio == socioId && v.id_sesion == sesionId);
+        }
+        public void Registrar(Visita visita)
+        {
+            try
+            {
+                _context.Visita.Add(visita);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar Visita: " + ex.InnerException?.Message ?? ex.Message);
+                throw;
+            }
         }
     }
 }

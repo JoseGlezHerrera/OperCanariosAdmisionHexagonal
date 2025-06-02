@@ -12,5 +12,7 @@ namespace Oper.Admision.Domain.IRepositories
         Task<List<Visita>> ObtenerTodasAsync();
         Task<List<Visita>> ObtenerPorFechaAsync(DateTime fecha);
         Task InsertAsync(Visita visita);
+        bool ExisteVisita(int socioId, int sesionId);
+        void Registrar(Visita visita);
     }
 }
