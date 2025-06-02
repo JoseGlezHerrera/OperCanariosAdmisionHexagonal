@@ -122,7 +122,17 @@ namespace Oper.Admision.Infrastructure.Repositories
         {
             return await _context.Socios.FindAsync(id);
         }
-
+        public List<Socio> ObtenerSociosProhibidos()
+        {
+            return (from p in _context.Problematicos
+                    where p.prohibida_entrada && p.id_socio != null join s in _context.Socios on p.id_socio equals s.id_socio
+                    select new Socio
+                    {
+                       id_socio = s.id_socio,
+                       dni = s.dni ?? string.Empty,
+                        nombre = s.nombre ?? string.Empty,
+                    }).ToList();
+        }
     }
 }
 

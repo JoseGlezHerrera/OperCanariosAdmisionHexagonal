@@ -20,6 +20,7 @@ namespace Oper.Admision.Domain.IRepositories
         Task<Socio> GetByDniAsync(string dni);
         Task EliminarAsync(int id);
         Task<Socio?> ObtenerPorIdAsync(int id);
+        List<Socio> ObtenerSociosProhibidos();
 
     }
 }

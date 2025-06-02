@@ -13,6 +13,8 @@ namespace Oper.Admision.Infrastructure
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Problematico> Problematicos { get; set; }
         public DbSet<ProblematicoVista> ProblematicoVista { get; set; }
+
+
         public GestionContext() : base()
         {
             this.conexion = "server=localhost;user id=root;password=danielovik;persistsecurityinfo=True;database=oper_canaletico;Convert Zero Datetime=True ";
