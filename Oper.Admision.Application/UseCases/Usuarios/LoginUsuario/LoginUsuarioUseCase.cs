@@ -1,34 +1,42 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Oper.Admision.Application.Exceptions;
+using Oper.Admision.Application.UseCases.Usuarios.Login;
 using Oper.Admision.Domain;
 using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Seguridad;
-using System.Runtime.InteropServices;
+using Oper.Admision.Infrastructure.Seguridad;
 
 namespace Oper.Admision.Application.UseCases.Usuarios.Login
 {
     public class LoginUsuarioUseCase
     {
-        private readonly IMapper _mapper; //para transformar datos entre diferentes tipos
-        private readonly IGestionUOW _uow; //maneja transacciones a la bd
-        private readonly IUsuarioRepository _usuarioRepository; //permite manipular los datos para la bd
-        private readonly ILogger<LoginUsuarioUseCase> _logger; //para depurar el codigo y register mensajes en el sistema
+        private readonly IMapper _mapper;
+        private readonly IGestionUOW _uow;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ILogger<LoginUsuarioUseCase> _logger;
+        private readonly JwtGenerator _jwtGenerator;
 
-        public LoginUsuarioUseCase(IMapper mapper, IGestionUOW uow, IUsuarioRepository usuarioRepository, ILogger<LoginUsuarioUseCase> logger)
+        public LoginUsuarioUseCase(
+            IMapper mapper,
+            IGestionUOW uow,
+            IUsuarioRepository usuarioRepository,
+            ILogger<LoginUsuarioUseCase> logger,
+            JwtGenerator jwtGenerator)
         {
-            this._mapper = mapper;
-            this._uow = uow;
-            this._usuarioRepository = usuarioRepository;
-            this._logger = logger;
+            _mapper = mapper;
+            _uow = uow;
+            _usuarioRepository = usuarioRepository;
+            _logger = logger;
+            _jwtGenerator = jwtGenerator;
         }
+
         private void Validate(LoginUsuarioInput input)
         {
-            this._logger.LogInformation("LoginUsuarioInput es: {@input}", input);
+            _logger.LogInformation("LoginUsuarioInput es: {@input}", input);
             if (input == null) throw new ArgumentInputException(Mensaje.Usuario_Input);
-
             if (string.IsNullOrEmpty(input.Nombre)) throw new ArgumentInputException(Mensaje.Requerido("Nombre"));
-            if (string.IsNullOrEmpty(input.Password)) throw new ArgumentInputException(Mensaje.Requerido("Passwod"));
+            if (string.IsNullOrEmpty(input.Password)) throw new ArgumentInputException(Mensaje.Requerido("Password"));
         }
 
         public LoginUsuarioOutput Execute(LoginUsuarioInput input)
@@ -46,15 +54,20 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Login
                     Errores = new List<string> { "Credenciales inválidas" }
                 };
             }
-            return BuildOutPut(usuario);
+
+            return BuildOutput(usuario);
         }
-        private LoginUsuarioOutput BuildOutPut(Domain.Models.Usuario entidad)
+
+        private LoginUsuarioOutput BuildOutput(Domain.Models.Usuario usuario)
         {
-            _logger.LogInformation("🟨 Usuario recibido del repositorio: {@entidad}", entidad);
-            var resultado = _mapper.Map<Domain.Models.Usuario, LoginUsuarioOutput>(entidad);
-            _logger.LogInformation("🟩 Resultado del mapping: {@resultado}", resultado);
+            _logger.LogInformation("🟨 Usuario recibido del repositorio: {@usuario}", usuario);
+            var resultado = _mapper.Map<Domain.Models.Usuario, LoginUsuarioOutput>(usuario);
+
+            //Aquí se genera el token JWT con nameid
+            resultado.Token = _jwtGenerator.GenerarToken(usuario);
             resultado.Succeeded = true;
             resultado.Mensaje = "Login correcto";
+            _logger.LogInformation("🟩 Resultado del mapping: {@resultado}", resultado);
             return resultado;
         }
     }

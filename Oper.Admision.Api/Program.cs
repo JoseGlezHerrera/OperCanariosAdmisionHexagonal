@@ -18,20 +18,16 @@ using AutoMapper;
 // Mappings
 using Oper.Admision.Api.UseCases.Usuarios.LoginUsuario;
 using Oper.Admision.Api.UseCases.Problematicos.ActualizarProblematico;
-//CrearProblematico
 using Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
 
 // UseCases
 using Oper.Admision.Application.UseCases.Problematico.ActualizarProblematico;
-//Crear Problematico
 using Oper.Admision.Application.UseCases.Problematico.EliminarProblematico;
 using Oper.Admision.Application.UseCases.Problematico.FiltrarProblematicoPorTipo;
 using Oper.Admision.Application.UseCases.Socios.GetSocio;
 using Oper.Admision.Application.UseCases.Socios;
 using Oper.Admision.Application.UseCases.Usuarios.Crear;
 using Oper.Admision.Application.UseCases.Usuarios.Login;
-//using Oper.Admision.Api.UsesCases.Problematicos.ObtenerProblematicoID;
-//using Oper.Admision.Api.UsesCases.Problematicos;
 using Log = Serilog.Log;
 
 //Visitas
@@ -49,9 +45,9 @@ using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitasPorFecha;
 using Oper.Admision.Application.UseCases.Socios.GetSocioProhibido;
 using Oper.Admision.Application.UseCases.Visitas.RegistrarVisita;
 using Oper.Admision.Application.UseCases.Socios.ValidarSocio;
+using Oper.Admision.Infrastructure.Seguridad;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 var configuration = builder.Configuration;
 var services = builder.Services;
@@ -91,7 +87,7 @@ services.Configure<FormOptions>(options =>
 services.Configure<IISServerOptions>(o => o.MaxRequestBodySize = int.MaxValue);
 services.Configure<KestrelServerOptions>(o => o.Limits.MaxRequestBodySize = int.MaxValue);
 
-// Mapper (registra todos los Profiles de AutoMapper automáticamente)
+// AutoMapper y UseCases
 builder.Services.AddScoped<EliminarSocioUseCase>();
 builder.Services.AddScoped<ObtenerSocioPorIdUseCase>();
 builder.Services.AddScoped<CrearVisitaUseCase>();
@@ -104,14 +100,22 @@ builder.Services.AddScoped<ActualizarProblematicoUseCase>();
 builder.Services.AddScoped<GetSocioProhibidoUseCase>();
 builder.Services.AddScoped<RegistrarVisitaUseCase>();
 builder.Services.AddScoped<ValidarSocioUseCase>();
-
+builder.Services.AddScoped<JwtGenerator>();
+builder.Services.AddScoped<GetTodosSociosUseCase>();
+builder.Services.AddScoped<ObtenerCumpleañerosUseCase>();
+builder.Services.AddScoped<GetSocioUseCase>();
+builder.Services.AddScoped<CrearProblematicoUseCase>();
+builder.Services.AddScoped<ObtenerProblematicoPorIdUseCase>();
+builder.Services.AddScoped<EliminarProblematicoUseCase>();
+builder.Services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
+builder.Services.AddScoped<CrearUsuarioUseCase>();
+builder.Services.AddScoped<LoginUsuarioUseCase>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 builder.Services.AddControllers();
 
-
-// Authentication
+// JWT Authentication
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -127,38 +131,31 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Config y capas
+// Configuración y capas
 services.Configure<Dominio>(configuration.GetSection("Dominio"));
 services.Configure<ConfigCorreo>(configuration.GetSection("ConfigCorreo"));
 services.AddApiLayer(configuration);
 services.AddInfrastructureLayer(configuration);
 services.AddApplicationLayer();
 
-// Dependencias manuales
+// Repositorios
 services.AddScoped<IUsuarioApi, UsuarioApi>();
 services.AddScoped<IVisitaRepository, VisitaRepository>();
 services.AddScoped<ISesionRepository, SesionRepository>();
 services.AddScoped<ISocioRepository, SocioRepository>();
 services.AddScoped<IProblematicoRepository, ProblematicoRepository>();
 
-// UseCases
-services.AddScoped<GetTodosSociosUseCase>();
-services.AddScoped<ObtenerCumpleañerosUseCase>();
-services.AddScoped<GetSocioUseCase>();
-services.AddScoped<CrearProblematicoUseCase>();
-services.AddScoped<ObtenerProblematicoPorIdUseCase>();
-services.AddScoped<ActualizarProblematicoUseCase>();
-services.AddScoped<EliminarProblematicoUseCase>();
-services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
-services.AddScoped<CrearUsuarioUseCase>();
-services.AddScoped<LoginUsuarioUseCase>();
-
-
 var app = builder.Build();
 
-// Middleware ordenado
+// Middlewares
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<ExpiracionSesionApiMiddleware>();
+
+// JWT: Validar token antes de acceder a claims
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Acceder al claim NameIdentifier (ya validado por el token)
 app.UseMiddleware<UsuarioApiMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -175,7 +172,9 @@ if (app.Environment.IsProduction())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
+app.UseRouting();
+app.UseAuthentication(); //Validar token
+app.UseAuthorization();  //Aplicar [Authorize]
+app.MapControllers();    //Controladores
+
 app.Run();

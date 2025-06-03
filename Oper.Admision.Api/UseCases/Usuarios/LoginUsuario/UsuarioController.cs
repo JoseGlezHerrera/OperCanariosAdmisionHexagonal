@@ -1,34 +1,35 @@
 ﻿using AutoMapper;
-using Oper.Admision.Api.Seguridad;
-using Oper.Admision.Application.UseCases.Usuarios.Login;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Oper.Admision.Application.UseCases.Usuarios.Login;
+using Oper.Admision.Infrastructure.Seguridad;
 using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
-        private readonly LoginUsuarioUseCase _useCase;
-        private readonly IOptions<JWT> _jwt;
         private readonly IMapper _mapper;
+        private readonly LoginUsuarioUseCase _useCase;
+        private readonly JwtGenerator _jwtGenerator;
 
-        public UsuarioController(LoginUsuarioUseCase useCase, IOptions<JWT> jwt, IMapper mapper)
+        public UsuarioController(IMapper mapper, LoginUsuarioUseCase useCase, JwtGenerator jwtGenerator)
         {
-            this._useCase = useCase;
-            this._jwt = jwt;
             this._mapper = mapper;
+            this._useCase = useCase;
+            this._jwtGenerator = jwtGenerator;
         }
 
         [HttpPost("Login")]
         public IActionResult Login([Required] LoginUsuarioRequest request)
         {
-            var input = this._mapper.Map<LoginUsuarioRequest, LoginUsuarioInput>(request);
+            var input = this._mapper.Map<LoginUsuarioInput>(request);
             var output = this._useCase.Execute(input);
-            var response = this._mapper.Map<LoginUsuarioOutput, LoginUsuarioResponse>(output);
-            response.Token = TokenJWT.GenerarTokenJWT(output.UsuarioId, this._jwt.Value);
+            var response = this._mapper.Map<LoginUsuarioResponse>(output);
+
+            response.Token = _jwtGenerator.GenerarToken(output.Usuario);
+
             return Ok(response);
         }
     }

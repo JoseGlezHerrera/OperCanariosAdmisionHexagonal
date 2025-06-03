@@ -1,6 +1,7 @@
 ﻿using Oper.Admision.Application.Exceptions;
 using Oper.Admision.Application.Wrappers;
 using System.Net;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace Oper.Admision.Api.Middlewares
@@ -8,8 +9,7 @@ namespace Oper.Admision.Api.Middlewares
     public class UsuarioApiMiddleware
     {
         private readonly RequestDelegate _next;
-        private ILogger<UsuarioApiMiddleware> _logger;
-
+        private readonly ILogger<UsuarioApiMiddleware> _logger;
 
         public UsuarioApiMiddleware(RequestDelegate next, ILogger<UsuarioApiMiddleware> logger)
         {
@@ -21,29 +21,37 @@ namespace Oper.Admision.Api.Middlewares
         {
             try
             {
-                ((IUsuarioApi)usuarioApi).Insertar(this.GetUsuarioId(context));
+                var usuarioId = this.GetUsuarioId(context);
+                _logger.LogWarning("🧠 Claim NameIdentifier: {UsuarioId}", usuarioId);
+
+                ((IUsuarioApi)usuarioApi).Insertar(usuarioId);
 
                 await _next(context);
             }
-            catch (System.Exception error)
+            catch (Exception error)
             {
-
-                this._logger.LogError(error, "Error ValidacionTJEntregada");
+                _logger.LogError(error, "❌ Error en UsuarioApiMiddleware");
                 await this.HandleExceptionMenssageAsync(context, error).ConfigureAwait(false);
             }
         }
 
         private int GetUsuarioId(HttpContext context)
         {
-            var claim = context.User.FindFirst("UsuarioId");
-            return claim == null ? 0 : int.Parse(claim.Value);
+            var claim = context.User.FindFirst(ClaimTypes.NameIdentifier);
+            return claim == null ? 0 : int.TryParse(claim.Value, out var id) ? id : 0;
         }
 
         private async Task HandleExceptionMenssageAsync(HttpContext context, Exception exception)
         {
             var response = context.Response;
             response.ContentType = "application/json";
-            var responseModel = new Response<string>() { succeeded = false, message = exception?.Message, data = exception.StackTrace };
+            var responseModel = new Response<string>
+            {
+                succeeded = false,
+                message = exception?.Message,
+                data = exception.StackTrace
+            };
+
             switch (exception)
             {
                 case ArgumentInputException:
@@ -57,8 +65,8 @@ namespace Oper.Admision.Api.Middlewares
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
             }
-            var result = JsonSerializer.Serialize(responseModel);
 
+            var result = JsonSerializer.Serialize(responseModel);
             await response.WriteAsync(result);
         }
     }

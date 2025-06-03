@@ -14,6 +14,6 @@ namespace Oper.Admision.Domain.IRepositories
 
         bool ExisteNombre(int? usuarioId, string nombre);
         Usuario Login(string username, string password);
-
+        Task<Usuario?> ObtenerPorNombreAsync(string nombreUsuario);
     }
 }

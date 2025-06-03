@@ -1,4 +1,6 @@
 ﻿
+using Oper.Admision.Domain.Models;
+
 namespace Oper.Admision.Application.UseCases.Usuarios.Login
 {
     public class LoginUsuarioOutput
@@ -10,5 +12,7 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Login
         public bool Succeeded { get; internal set; }
         public string Mensaje { get; internal set; }
         public List<string> Errores { get; internal set; }
+        public string? Token { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

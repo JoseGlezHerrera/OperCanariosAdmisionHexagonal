@@ -73,12 +73,18 @@ namespace Oper.Admision.Infrastructure.Repositories
             var passwordEncriptado = Encriptacion.Encriptar(password);
 
             var usuario = _context.Usuarios
-                .AsNoTracking()
+                .Include(u => u.Rol) // incluye Rol si es navegación
                 .FirstOrDefault(u =>
                     u.Nombre == nombre &&
                     u.Password == passwordEncriptado &&
                     !u.Eliminado);
-            _logger.LogInformation("🔍 Usuario encontrado: {@usuario}", usuario);
+
+            if (usuario == null)
+                return null;
+
+            // LOG de seguridad
+            _logger.LogWarning("🎯 Login confirmado. UsuarioID: {UsuarioId}, Nombre: {Nombre}", usuario.UsuarioId, usuario.Nombre);
+
             return usuario;
         }
         public Usuario? Get(string email)
@@ -102,5 +108,11 @@ namespace Oper.Admision.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+        public async Task<Usuario?> ObtenerPorNombreAsync(string nombreUsuario)
+        {
+            return await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Nombre == nombreUsuario);
+        }
+
     }
 }
