@@ -1,71 +1,65 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-using Oper.Admision.Application.Exceptions;
+using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
+using Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/usuario")]
     [Authorize]
-    public class UsuarioController : ControllerBase
+    public class CambiarPasswordUsuarioController : ControllerBase
     {
         private readonly CambiarPasswordUsuarioUseCase _useCase;
-        private readonly IUsuarioApi _usuarioApi;
-        private readonly ILogger<UsuarioController> _logger;
+        private readonly IMapper _mapper;
+        private readonly ILogger<CambiarPasswordUsuarioController> _logger;
 
-        public UsuarioController(CambiarPasswordUsuarioUseCase useCase, IUsuarioApi usuarioApi, ILogger<UsuarioController> logger)
+        public CambiarPasswordUsuarioController(
+            CambiarPasswordUsuarioUseCase useCase,
+            IMapper mapper,
+            ILogger<CambiarPasswordUsuarioController> logger)
         {
             _useCase = useCase;
-            _usuarioApi = usuarioApi;
+            _mapper = mapper;
             _logger = logger;
         }
 
-        [HttpPost("CambiarPassword")]
+        /// PUT /api/usuario/cambiar-password
+        /// Recibe un JSON:
+        /// {
+        ///   "usuarioId": 123,
+        ///   "password": "NuevaClave123"
+
+        [HttpPut("cambiar-password")]
         public IActionResult CambiarPassword([FromBody] CambiarPasswordUsuarioRequest request)
         {
+            if (request == null)
+                return BadRequest(new { mensaje = "El cuerpo de la petición es requerido." });
+
             try
             {
-                var input = new CambiarPasswordUsuarioInput
-                {
-                    Password = request.Password,
-                    UsuarioId = _usuarioApi.UsuarioId
-                };
+                _logger.LogInformation("Petición de cambiar contraseña para UsuarioId {UsuarioId}", request.UsuarioId);
 
-                var result = _useCase.Execute(input);
+                var inputUoC = _mapper.Map<CambiarPasswordUsuarioInput>(request);
 
-                if (!result)
+                var changed = _useCase.Execute(inputUoC);
+
+                if (changed)
                 {
-                    return BadRequest(new
-                    {
-                        succeeded = false,
-                        message = "La nueva contraseña no puede ser igual a la actual.",
-                        errores = new[] { "Debe establecer una contraseña diferente." },
-                        data = (object)null
-                    });
+                    return Ok(new { mensaje = "Contraseña cambiada correctamente." });
                 }
-
-                return Ok(new
+                else
                 {
-                    succeeded = true,
-                    message = "Contraseña cambiada correctamente.",
-                    errores = new string[] { },
-                    data = (object)null
-                });
+                    // Si el UseCase devolvió false, significa que la nueva contraseña es igual a la actual
+                    return BadRequest(new { mensaje = "La nueva contraseña es igual a la actual." });
+                }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                _logger.LogError(ex, "Error cambiando contraseña");
-                return StatusCode(500, new
-                {
-                    succeeded = false,
-                    message = ex.Message,
-                    errores = new[] { ex.InnerException?.Message },
-                    data = (object)null
-                });
+                _logger.LogWarning(ex, "Error en CambiarPassword: {Mensaje}", ex.Message);
+                return BadRequest(new { mensaje = ex.Message });
             }
         }
     }

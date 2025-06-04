@@ -1,45 +1,57 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Oper.Admision.Application.UseCases.Usuarios.Login;
-using Oper.Admision.Infrastructure.Seguridad;
-using System.ComponentModel.DataAnnotations;
-using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
+using Oper.Admision.Api.UseCases.Usuarios.LoginUsuario;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class UsuarioController : ControllerBase
+    [Route("api/usuario")]
+    public class LoginUsuarioController : ControllerBase
     {
-        private readonly CambiarPasswordUsuarioUseCase _cambiarPasswordUseCase;
+        private readonly LoginUsuarioUseCase _loginUseCase;
+        private readonly IMapper _mapper;
+        private readonly ILogger<LoginUsuarioController> _logger;
 
-        public UsuarioController(CambiarPasswordUsuarioUseCase cambiarPasswordUseCase)
+        public LoginUsuarioController(
+            LoginUsuarioUseCase loginUseCase,
+            IMapper mapper,
+            ILogger<LoginUsuarioController> logger)
         {
-            _cambiarPasswordUseCase = cambiarPasswordUseCase;
+            _loginUseCase = loginUseCase;
+            _mapper = mapper;
+            _logger = logger;
         }
 
-        [HttpPut("cambiar-password")]
-        public IActionResult CambiarPassword([FromBody] CambiarPasswordUsuarioInput input)
+
+        /// POST /api/usuario/login
+        /// Recibe un JSON:
+        /// {
+        ///   "nombre": "usuario",
+        ///   "password": "clave"
+        /// }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginUsuarioRequest request)
         {
+            if (request == null)
+                return BadRequest(new { mensaje = "El cuerpo de la petición es requerido." });
+
             try
             {
-                bool exito = _cambiarPasswordUseCase.Execute(input);
+                _logger.LogInformation("Petición de login para usuario '{Nombre}'", request.Nombre);
 
-                if (exito)
-                {
-                    return Ok(new { mensaje = "Contraseña cambiada correctamente" });
-                }
-                else
-                {
-                    return BadRequest(new { mensaje = "La nueva contraseña es igual a la actual." });
-                }
+                var inputUoC = _mapper.Map<LoginUsuarioInput>(request);
+                var resultado = _loginUseCase.Execute(inputUoC);
+                var response = _mapper.Map<LoginUsuarioResponse>(resultado);
+                return Ok(response);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                return BadRequest(new { mensaje = ex.Message });
+                _logger.LogWarning(ex, "Error en Login: {Mensaje}", ex.Message);
+                // Si falla login (credenciales inválidas, excepción, etc.), devolvemos 401
+                return Unauthorized(new { mensaje = ex.Message });
             }
         }
     }
