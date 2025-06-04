@@ -42,12 +42,16 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Crear
             var usuario = this._mapper.Map<CrearUsuarioInput, Domain.Models.Usuario>(input);
             // Se añade la contraseña y los datos por defectos.
             usuario.FechaCreacion= DateTime.Now;
-            var nuevaClave = GeneradorClaves.Token(6);
-            usuario.Password = Encriptacion.Encriptar(nuevaClave); // Se encripta la clave creada para el usuario.
+            _logger.LogWarning("Password recibida (POST): {P}", input.Password);
+            var hash = Encriptacion.Encriptar(input.Password);
+            _logger.LogWarning("Hash generado: {H}", hash);
+            usuario.Password = hash;
+            _logger.LogWarning("Contraseña asignada a entidad usuario: {P}", usuario.Password);
+
             this._usuarioRepository.Create(usuario);
             this._uow.Save();
-            this.EnviarNotificacion(usuario, nuevaClave);
-            return this.BuildOutPut(usuario, nuevaClave);
+            this.EnviarNotificacion(usuario, input.Password);
+            return this.BuildOutPut(usuario, input.Password);
         }
 
         private CrearUsuarioOutput BuildOutPut(Domain.Models.Usuario entidad, string nuevaClave)

@@ -22,19 +22,15 @@ namespace Oper.Admision.Api.Middlewares
             try
             {
                 var usuarioId = this.GetUsuarioId(context);
-                _logger.LogWarning("🧠 Claim NameIdentifier: {UsuarioId}", usuarioId);
-
-                ((IUsuarioApi)usuarioApi).Insertar(usuarioId);
-
+                _logger.LogWarning("Claim NameIdentifier: {UsuarioId}", usuarioId);
                 await _next(context);
             }
             catch (Exception error)
             {
-                _logger.LogError(error, "❌ Error en UsuarioApiMiddleware");
+                _logger.LogError(error, "Error en UsuarioApiMiddleware");
                 await this.HandleExceptionMenssageAsync(context, error).ConfigureAwait(false);
             }
         }
-
         private int GetUsuarioId(HttpContext context)
         {
             var claim = context.User.FindFirst(ClaimTypes.NameIdentifier);

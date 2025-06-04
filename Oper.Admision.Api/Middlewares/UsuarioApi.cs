@@ -1,22 +1,33 @@
-﻿namespace Oper.Admision.Api
+﻿using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+
+namespace Oper.Admision.Api
 {
     public interface IUsuarioApi
     {
         int UsuarioId { get; }
-        void Insertar(int usuarioId);
     }
+
     public class UsuarioApi : IUsuarioApi
     {
-        public int UsuarioId { get; private set; }
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsuarioApi()
+        public UsuarioApi(IHttpContextAccessor httpContextAccessor)
         {
-            this.UsuarioId = 1;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public void Insertar(int usuarioId)
+        public int UsuarioId
         {
-            this.UsuarioId = usuarioId;
+            get
+            {
+                var claim = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
+                if (claim != null && int.TryParse(claim.Value, out int userId))
+                {
+                    return userId;
+                }
+                return 0;
+            }
         }
     }
 }

@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Oper.Admision.Application.UseCases.Usuarios.Login;
 using Oper.Admision.Infrastructure.Seguridad;
 using System.ComponentModel.DataAnnotations;
+using Oper.Admision.Domain.Models;
+using System;
+using System.Collections.Generic;
+using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
 {
@@ -10,27 +14,33 @@ namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly LoginUsuarioUseCase _useCase;
-        private readonly JwtGenerator _jwtGenerator;
+        private readonly CambiarPasswordUsuarioUseCase _cambiarPasswordUseCase;
 
-        public UsuarioController(IMapper mapper, LoginUsuarioUseCase useCase, JwtGenerator jwtGenerator)
+        public UsuarioController(CambiarPasswordUsuarioUseCase cambiarPasswordUseCase)
         {
-            this._mapper = mapper;
-            this._useCase = useCase;
-            this._jwtGenerator = jwtGenerator;
+            _cambiarPasswordUseCase = cambiarPasswordUseCase;
         }
 
-        [HttpPost("Login")]
-        public IActionResult Login([Required] LoginUsuarioRequest request)
+        [HttpPut("cambiar-password")]
+        public IActionResult CambiarPassword([FromBody] CambiarPasswordUsuarioInput input)
         {
-            var input = this._mapper.Map<LoginUsuarioInput>(request);
-            var output = this._useCase.Execute(input);
-            var response = this._mapper.Map<LoginUsuarioResponse>(output);
+            try
+            {
+                bool exito = _cambiarPasswordUseCase.Execute(input);
 
-            response.Token = _jwtGenerator.GenerarToken(output.Usuario);
-
-            return Ok(response);
+                if (exito)
+                {
+                    return Ok(new { mensaje = "Contraseña cambiada correctamente" });
+                }
+                else
+                {
+                    return BadRequest(new { mensaje = "La nueva contraseña es igual a la actual." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
         }
     }
 }

@@ -46,6 +46,8 @@ using Oper.Admision.Application.UseCases.Socios.GetSocioProhibido;
 using Oper.Admision.Application.UseCases.Visitas.RegistrarVisita;
 using Oper.Admision.Application.UseCases.Socios.ValidarSocio;
 using Oper.Admision.Infrastructure.Seguridad;
+using Oper.Admision.Domain;
+using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -100,22 +102,20 @@ builder.Services.AddScoped<ActualizarProblematicoUseCase>();
 builder.Services.AddScoped<GetSocioProhibidoUseCase>();
 builder.Services.AddScoped<RegistrarVisitaUseCase>();
 builder.Services.AddScoped<ValidarSocioUseCase>();
-builder.Services.AddScoped<JwtGenerator>();
-builder.Services.AddScoped<GetTodosSociosUseCase>();
-builder.Services.AddScoped<ObtenerCumpleañerosUseCase>();
-builder.Services.AddScoped<GetSocioUseCase>();
-builder.Services.AddScoped<CrearProblematicoUseCase>();
-builder.Services.AddScoped<ObtenerProblematicoPorIdUseCase>();
-builder.Services.AddScoped<EliminarProblematicoUseCase>();
-builder.Services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
-builder.Services.AddScoped<CrearUsuarioUseCase>();
-builder.Services.AddScoped<LoginUsuarioUseCase>();
+builder.Services.AddScoped<IGestionUOW, GestionUOW>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<CambiarPasswordUsuarioUseCase>();
+builder.Services.AddScoped<JwtGenerator>();
+builder.Services.AddScoped<LoginUsuarioUseCase>();
+builder.Services.AddScoped<IUsuarioApi, UsuarioApi>();
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 
-// JWT Authentication
+
+// Authentication
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -145,6 +145,20 @@ services.AddScoped<ISesionRepository, SesionRepository>();
 services.AddScoped<ISocioRepository, SocioRepository>();
 services.AddScoped<IProblematicoRepository, ProblematicoRepository>();
 
+// UseCases
+services.AddScoped<GetTodosSociosUseCase>();
+services.AddScoped<ObtenerCumpleañerosUseCase>();
+services.AddScoped<GetSocioUseCase>();
+services.AddScoped<CrearProblematicoUseCase>();
+services.AddScoped<ObtenerProblematicoPorIdUseCase>();
+services.AddScoped<ActualizarProblematicoUseCase>();
+services.AddScoped<EliminarProblematicoUseCase>();
+services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
+services.AddScoped<CrearUsuarioUseCase>();
+services.AddScoped<LoginUsuarioUseCase>();
+
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
 // Middlewares
@@ -172,9 +186,10 @@ if (app.Environment.IsProduction())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthentication(); //Validar token
-app.UseAuthorization();  //Aplicar [Authorize]
-app.MapControllers();    //Controladores
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+
 
 app.Run();

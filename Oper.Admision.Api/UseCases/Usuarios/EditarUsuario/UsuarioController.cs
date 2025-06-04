@@ -21,7 +21,7 @@ namespace Oper.Admision.Api.UseCases.Usuarios.EditarUsuario
             this._mapper = mapper;
         }
 
-        [HttpPost("Editar")]
+        [HttpPut("Editar")]
         public IActionResult Editar ([Required]  EditarUsuarioRequest request)
         {
             var input = this._mapper.Map<EditarUsuarioRequest, EditarUsuarioInput>(request);

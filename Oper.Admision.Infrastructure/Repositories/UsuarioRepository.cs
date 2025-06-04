@@ -25,26 +25,26 @@ namespace Oper.Admision.Infrastructure.Repositories
         public ICollection<Usuario> GetAll()
         {
             return this._context.Usuarios
-                                .Where(u => !u.Eliminado)
-                                .Select(u => new Usuario
-                                {
-                                    UsuarioId = u.UsuarioId,
-                                    Nombre = u.Nombre,
-                                    Email = u.Email ?? string.Empty,
-                                    Dni = u.Dni ?? string.Empty,
-                                    FechaCreacion = u.FechaCreacion,
-                                    FechaActualizacion = u.FechaActualizacion,
-                                    FechaBaja = u.FechaBaja,
-                                    Bloqueado = u.Bloqueado,
-                                    Eliminado = u.Eliminado,
-                                    RolId = u.RolId ?? 0
-                                })
-                                .ToList();
+                .Where(u => !u.Eliminado)
+                .Select(u => new Usuario
+                {
+                    UsuarioId = u.UsuarioId,
+                    Nombre = u.Nombre,
+                    Email = u.Email ?? string.Empty,
+                    Dni = u.Dni ?? string.Empty,
+                    FechaCreacion = u.FechaCreacion,
+                    FechaActualizacion = u.FechaActualizacion,
+                    FechaBaja = u.FechaBaja,
+                    Bloqueado = u.Bloqueado,
+                    Eliminado = u.Eliminado,
+                    RolId = u.RolId ?? 0
+                })
+                .ToList();
         }
 
         public void Create(Usuario usuario)
         {
-            usuario.Password = Encriptacion.Encriptar(usuario.Password);
+            
             this._context.Usuarios.Add(usuario);
         }
 
@@ -68,30 +68,29 @@ namespace Oper.Admision.Infrastructure.Repositories
                 return this._context.Usuarios.Any(u => u.Nombre == nombre && !u.Eliminado && u.UsuarioId == usuarioId);
         }
 
-        public Usuario? Login(string nombre, string password)
+        public Usuario? Login(string nombre, string passwordEncriptada)
         {
-            var passwordEncriptado = Encriptacion.Encriptar(password);
-
             var usuario = _context.Usuarios
-                .Include(u => u.Rol) // incluye Rol si es navegación
+                .Include(u => u.Rol)
                 .FirstOrDefault(u =>
                     u.Nombre == nombre &&
-                    u.Password == passwordEncriptado &&
+                    u.Password == passwordEncriptada &&
                     !u.Eliminado);
 
             if (usuario == null)
                 return null;
 
             // LOG de seguridad
-            _logger.LogWarning("🎯 Login confirmado. UsuarioID: {UsuarioId}, Nombre: {Nombre}", usuario.UsuarioId, usuario.Nombre);
+            _logger.LogWarning("Login confirmado. UsuarioID: {UsuarioId}, Nombre: {Nombre}", usuario.UsuarioId, usuario.Nombre);
 
             return usuario;
         }
+
         public Usuario? Get(string email)
         {
             if (this.ExisteEmail(email))
             {
-                return this._context.Usuarios.Where(u => u.Email == email).FirstOrDefault();
+                return this._context.Usuarios.FirstOrDefault(u => u.Email == email);
             }
             else
             {
@@ -108,11 +107,12 @@ namespace Oper.Admision.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
         public async Task<Usuario?> ObtenerPorNombreAsync(string nombreUsuario)
         {
             return await _context.Usuarios
+                .Include(u => u.Rol)
                 .FirstOrDefaultAsync(u => u.Nombre == nombreUsuario);
         }
-
     }
 }

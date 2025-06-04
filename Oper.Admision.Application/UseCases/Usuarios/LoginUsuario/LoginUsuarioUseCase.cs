@@ -43,7 +43,8 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Login
         {
             Validate(input);
 
-            var usuario = _usuarioRepository.Login(input.Nombre, input.Password);
+            var passwordEncriptada = Encriptacion.Encriptar(input.Password);
+            var usuario = _usuarioRepository.Login(input.Nombre, passwordEncriptada);
             if (usuario == null)
             {
                 _logger.LogWarning("Intento fallido de login con el nombre: {Nombre}", input.Nombre);
@@ -60,14 +61,12 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Login
 
         private LoginUsuarioOutput BuildOutput(Domain.Models.Usuario usuario)
         {
-            _logger.LogInformation("🟨 Usuario recibido del repositorio: {@usuario}", usuario);
+            _logger.LogInformation("Usuario recibido del repositorio: {@usuario}", usuario);
             var resultado = _mapper.Map<Domain.Models.Usuario, LoginUsuarioOutput>(usuario);
-
-            //Aquí se genera el token JWT con nameid
             resultado.Token = _jwtGenerator.GenerarToken(usuario);
             resultado.Succeeded = true;
             resultado.Mensaje = "Login correcto";
-            _logger.LogInformation("🟩 Resultado del mapping: {@resultado}", resultado);
+            _logger.LogInformation("Resultado del mapping: {@resultado}", resultado);
             return resultado;
         }
     }
