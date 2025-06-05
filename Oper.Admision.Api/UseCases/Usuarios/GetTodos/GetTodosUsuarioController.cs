@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.GetTodosUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
     [Authorize]
-    public class UsuarioController : ControllerBase
+    public class GetTodosUsuarioController : ControllerBase
     {
         private readonly GetTodosUsuarioUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public UsuarioController(GetTodosUsuarioUseCase useCase, IMapper mapper)
+        public GetTodosUsuarioController(GetTodosUsuarioUseCase useCase, IMapper mapper)
         {
             this._useCase = useCase;
             this._mapper = mapper;

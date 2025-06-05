@@ -7,7 +7,7 @@ using Oper.Admision.Api.UseCases.Usuarios.LoginUsuario;
 namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
 {
     [ApiController]
-    [Route("api/usuario")]
+    [Route("api/usuarios")]
     public class LoginUsuarioController : ControllerBase
     {
         private readonly LoginUsuarioUseCase _loginUseCase;
@@ -25,7 +25,7 @@ namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
         }
 
 
-        /// POST /api/usuario/login
+        /// POST /api/usuarios/login
         /// Recibe un JSON:
         /// {
         ///   "nombre": "usuario",

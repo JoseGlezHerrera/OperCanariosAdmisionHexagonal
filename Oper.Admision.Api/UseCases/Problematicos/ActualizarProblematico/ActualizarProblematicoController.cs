@@ -7,7 +7,7 @@ using Oper.Admision.Domain.IRepositories;
 
 namespace Oper.Admision.Api.UseCases.Problematicos.ActualizarProblematico;
 
-[Route("api/problematicos")]
+[Route("api/problematicos/actualizar")]
 [ApiController]
 [Authorize]
 public class ActualizarProblematicoController : ControllerBase
@@ -16,10 +16,7 @@ public class ActualizarProblematicoController : ControllerBase
     private readonly IMapper _mapper;
     private readonly IProblematicoRepository _repository;
 
-    public ActualizarProblematicoController(
-        ActualizarProblematicoUseCase useCase,
-        IMapper mapper,
-        IProblematicoRepository repository)
+    public ActualizarProblematicoController(ActualizarProblematicoUseCase useCase,IMapper mapper,IProblematicoRepository repository)
     {
         _useCase = useCase;
         _mapper = mapper;

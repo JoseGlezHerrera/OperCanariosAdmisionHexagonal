@@ -9,13 +9,13 @@
   <ItemGroup>
     <Compile Remove="UseCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
     <Compile Remove="UseCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
-    <Compile Remove="UseCases\Usuarios\GetEnlaces\UsuarioController.cs" />
+    <Compile Remove="UseCases\Usuarios\GetEnlaces\GetEnlacesUsuarioController.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="UseCases\Usuarios\GetEnlaces\GetEnlaceMapping.cs" />
     <None Include="UseCases\Usuarios\GetEnlaces\GetEnlacesResponse.cs" />
-    <None Include="UseCases\Usuarios\GetEnlaces\UsuarioController.cs" />
+    <None Include="UseCases\Usuarios\GetEnlaces\GetEnlacesUsuarioController.cs" />
   </ItemGroup>
 
   <ItemGroup>

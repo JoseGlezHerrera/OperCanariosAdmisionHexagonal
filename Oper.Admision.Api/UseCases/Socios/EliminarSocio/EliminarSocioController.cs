@@ -2,7 +2,7 @@
 using Oper.Admision.Application.UseCases.Socios.EliminarSocio;
 namespace Oper.Admision.Api.UseCases.Socios.EliminarSocio
 {
-    [Route("api/socios")]
+    [Route("api/socios/eliminar")]
     [ApiController]
     public class EliminarSocioController : ControllerBase
     {

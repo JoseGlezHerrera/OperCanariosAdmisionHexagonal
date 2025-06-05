@@ -8,11 +8,11 @@ namespace Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicos;
 [Route("api/problematicos")]
 [ApiController]
 [Authorize]
-public class GetProblematicosController : ControllerBase
+public class ObtenerProblematicosController : ControllerBase
 {
     private readonly IProblematicoRepository _repo;
 
-    public GetProblematicosController(IProblematicoRepository repo)
+    public ObtenerProblematicosController(IProblematicoRepository repo)
     {
         _repo = repo;
     }

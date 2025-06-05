@@ -5,13 +5,13 @@ using Oper.Admision.Application.UseCases.Socios.ObtenerSocioPorId;
 
 namespace Oper.Admision.Api.UseCases.Socios.ObtenerSocioPorId
 {
-    [Route("api/socios")]
+    [Route("api/socios/obtener-por-id")]
     [ApiController]
-    public class ObtenerSocioPorIdController : ControllerBase
+    public class ObtenerSocioPorIDController : ControllerBase
     {
         private readonly ObtenerSocioPorIdUseCase _useCase;
         private readonly IMapper _mapper;
-        public ObtenerSocioPorIdController(ObtenerSocioPorIdUseCase useCase, IMapper mapper)
+        public ObtenerSocioPorIDController(ObtenerSocioPorIdUseCase useCase, IMapper mapper)
         {
             _useCase = useCase;
             _mapper = mapper;

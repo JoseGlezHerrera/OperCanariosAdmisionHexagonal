@@ -5,12 +5,12 @@ using Oper.Admision.Domain.IRepositories;
 namespace Oper.Admision.Api.UseCases.Usuarios.LogoutUsuario
 {
     [ApiController]
-    [Route("api/usuario/logout")]
-    public class UsuarioController : ControllerBase
+    [Route("api/usuarios/logout")]
+    public class LogoutUsuarioController : ControllerBase
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository)
+        public LogoutUsuarioController(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }

@@ -8,7 +8,7 @@ using Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario;
 namespace Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario
 {
     [ApiController]
-    [Route("api/usuario")]
+    [Route("api/usuarios")]
     [Authorize]
     public class CambiarPasswordUsuarioController : ControllerBase
     {

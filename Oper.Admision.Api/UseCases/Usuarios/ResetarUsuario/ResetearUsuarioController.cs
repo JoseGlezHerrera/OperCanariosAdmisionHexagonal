@@ -6,14 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.ResetearUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
     [Authorize]
-    public class UsuarioController : ControllerBase
+    public class ResetearUsuarioController : ControllerBase
     {
         private readonly ResetearUsuarioUseCase _useCase;
 
-        public UsuarioController(ResetearUsuarioUseCase useCase)
+        public ResetearUsuarioController(ResetearUsuarioUseCase useCase)
         {
             this._useCase = useCase;
         }

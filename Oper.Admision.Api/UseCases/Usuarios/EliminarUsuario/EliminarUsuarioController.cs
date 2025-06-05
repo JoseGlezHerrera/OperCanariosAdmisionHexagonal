@@ -7,14 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.EliminarUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios/eliminar")]
     [ApiController]
     [Authorize]
-    public class UsuarioController : ControllerBase
+    public class EliminarUsuarioController : ControllerBase
     {
         private readonly CambiarPasswordUsuarioUseCase _useCase;
 
-        public UsuarioController(CambiarPasswordUsuarioUseCase useCase)
+        public EliminarUsuarioController(CambiarPasswordUsuarioUseCase useCase)
         {
             this._useCase = useCase;
         }

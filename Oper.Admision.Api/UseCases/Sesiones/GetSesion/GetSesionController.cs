@@ -4,15 +4,15 @@ using Oper.Admision.Application.UseCases.Sesiones.GetSesion;
 
 namespace Oper.Admision.Api.UseCases.Sesiones.GetSesion
 {
-    [Route("api/[controller]")]
+    [Route("api/sesiones")]
     [ApiController]
 
-    public class SesionController : ControllerBase
+    public class GetSesionController : ControllerBase
     {
         private readonly GetSesionUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public SesionController(GetSesionUseCase useCase, IMapper mapper)
+        public GetSesionController(GetSesionUseCase useCase, IMapper mapper)
         {
             this._useCase = useCase;
             this._mapper = mapper;

@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Socios.ValidarSocio;
 namespace Oper.Admision.Api.UseCases.Socios.ValidarSocio
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/socios/validar")]
     public class ValidarSocioController : ControllerBase
     {
         private readonly ValidarSocioUseCase _useCase;

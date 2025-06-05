@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Visitas.ActualizarVisita;
 namespace Oper.Admision.Api.UseCases.Visitas.ActualizarVisita
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/visitas/actualizar")]
     public class ActualizarVisitaController : ControllerBase
     {
         private readonly ActualizarVisitaUseCase _useCase;

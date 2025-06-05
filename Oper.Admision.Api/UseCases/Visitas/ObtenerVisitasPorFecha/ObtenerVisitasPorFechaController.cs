@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitasPorFecha;
 namespace Oper.Admision.Api.UseCases.Visitas.ObtenerVisitasPorFecha
 {
     [ApiController]
-    [Route("api/visitas/[controller]")]
+    [Route("api/visitas/obtener-por-fecha")]
     public class ObtenerVisitasPorFechaController : ControllerBase
     {
         private readonly ObtenerVisitasPorFechaUseCase _useCase;

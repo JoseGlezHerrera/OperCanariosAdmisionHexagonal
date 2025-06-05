@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.GetEnlaces
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
     [Authorize]
     public class UsuarioController : ControllerBase

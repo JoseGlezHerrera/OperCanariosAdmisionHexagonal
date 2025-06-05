@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
 namespace Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
 
-[Route("api/problematicos")]
+[Route("api/problematicos/obtener-por-id")]
 [ApiController]
 [Authorize]
-public class ObtenerProblematicoPorIdController : ControllerBase
+public class ObtenerProblematicoPorIDController : ControllerBase
 {
     private readonly ObtenerProblematicoPorIdUseCase _useCase;
 
-    public ObtenerProblematicoPorIdController(ObtenerProblematicoPorIdUseCase useCase)
+    public ObtenerProblematicoPorIDController(ObtenerProblematicoPorIdUseCase useCase)
     {
         _useCase = useCase;
     }

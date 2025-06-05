@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Rol.GetTodos;
 
 namespace Oper.Admision.Api.UseCases.Rol
 {
-    [Route("api/[controller]")]
+    [Route("api/roles")]
     [ApiController]
     public class RolController : ControllerBase
     {

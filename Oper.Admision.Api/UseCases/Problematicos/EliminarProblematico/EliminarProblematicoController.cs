@@ -5,7 +5,7 @@ using Oper.Admision.Application.UseCases.Visita.EliminarVisita;
 
 namespace Oper.Admision.Api.UseCases.Problematicos.EliminarProblematico;
 
-[Route("api/problematicos")]
+[Route("api/problematicos/eliminar")]
 [ApiController]
 [Authorize]
 public class EliminarProblematicoController : ControllerBase

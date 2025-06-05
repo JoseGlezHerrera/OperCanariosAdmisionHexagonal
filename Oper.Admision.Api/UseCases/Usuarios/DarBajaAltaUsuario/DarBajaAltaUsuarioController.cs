@@ -7,15 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.DarBajaAltaUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
     [Authorize]
-    public class UsuarioController : ControllerBase
+    public class DarBajaAltaUsuarioController : ControllerBase
     {
         private readonly DarBajaAltaUsuarioUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public UsuarioController(DarBajaAltaUsuarioUseCase useCase, IMapper mapper )
+        public DarBajaAltaUsuarioController(DarBajaAltaUsuarioUseCase useCase, IMapper mapper )
         {
             this._useCase =useCase;
             this._mapper = mapper;

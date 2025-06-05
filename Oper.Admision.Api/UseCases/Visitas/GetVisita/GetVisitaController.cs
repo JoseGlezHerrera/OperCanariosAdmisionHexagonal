@@ -4,15 +4,15 @@ using Oper.Admision.Application.UseCases.Visitas.GetVisita;
 
 namespace Oper.Admision.Api.UseCases.Visitas.GetVisita
 {
-    [Route("api/[controller]")]
+    [Route("api/visitas")]
     [ApiController]
 
-    public class VisitaController : ControllerBase
+    public class GetVisitaController : ControllerBase
     {
         private readonly GetVisitaUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public VisitaController(GetVisitaUseCase useCase, IMapper mapper)
+        public GetVisitaController(GetVisitaUseCase useCase, IMapper mapper)
         {
             this._useCase = useCase;
             this._mapper = mapper;

@@ -8,15 +8,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Socios.CrearSocio
 {
-    [Route("api/[controller]")]
+    [Route("api/socios")]
     [ApiController]
-    public class SocioController : ControllerBase
+    public class CrearSocioController : ControllerBase
     {
         private readonly CrearSocioUseCase _useCase;
         private readonly IMapper _mapper;
         private readonly GetTodosSociosUseCase _getTodosUseCase;
 
-        public SocioController(CrearSocioUseCase useCase, IMapper mapper)
+        public CrearSocioController(CrearSocioUseCase useCase, IMapper mapper)
         {
             this._useCase = useCase;
             this._mapper = mapper;

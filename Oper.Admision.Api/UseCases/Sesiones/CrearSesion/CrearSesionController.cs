@@ -6,14 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Sesiones.CrearSesion
 {
-    [Route("api/[controller]")]
+    [Route("api/sesiones")]
     [ApiController]
-    public class SesionController : ControllerBase
+    public class CrearSesionController : ControllerBase
     {
         private readonly CrearSesionUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public SesionController(CrearSesionUseCase useCase, IMapper mapper)
+        public CrearSesionController(CrearSesionUseCase useCase, IMapper mapper)
         {
             _useCase = useCase;
             _mapper = mapper;

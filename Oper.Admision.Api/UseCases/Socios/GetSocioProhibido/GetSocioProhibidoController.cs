@@ -5,7 +5,7 @@ using Oper.Admision.Domain.Models;
 namespace Oper.Admision.Api.UseCases.Socios.GetSocioProhibido
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/socios/prohibidos")]
     public class GetSocioProhibidoController : ControllerBase
     {
         private readonly GetSocioProhibidoUseCase _useCase;

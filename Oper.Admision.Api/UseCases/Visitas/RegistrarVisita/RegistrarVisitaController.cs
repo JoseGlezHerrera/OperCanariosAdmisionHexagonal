@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Visitas.RegistrarVisita;
 namespace Oper.Admision.Api.UseCases.Visitas.RegistrarVisita
 {
     [ApiController]
-    [Route("api/[controller]")] 
+    [Route("api/visitas/registrar-visita")] 
     public class RegistrarVisitaController : ControllerBase
     {
         private readonly RegistrarVisitaUseCase _useCase;

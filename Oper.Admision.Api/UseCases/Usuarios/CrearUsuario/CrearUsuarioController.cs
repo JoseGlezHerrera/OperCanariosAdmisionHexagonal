@@ -7,14 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.CrearUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class CrearUsuarioController : ControllerBase
     {
         private readonly CrearUsuarioUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public UsuarioController(CrearUsuarioUseCase useCase, IMapper mapper )
+        public CrearUsuarioController(CrearUsuarioUseCase useCase, IMapper mapper )
         {
             this._useCase =useCase;
             this._mapper = mapper;

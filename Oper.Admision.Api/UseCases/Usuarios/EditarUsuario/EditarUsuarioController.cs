@@ -7,15 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.EditarUsuario
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     [ApiController]
     
-    public class UsuarioController : ControllerBase
+    public class EditarUsuarioController : ControllerBase
     {
         private readonly EditarUsuarioUseCase _useCase;
         private readonly IMapper _mapper;
 
-        public UsuarioController(EditarUsuarioUseCase useCase, IMapper mapper )
+        public EditarUsuarioController(EditarUsuarioUseCase useCase, IMapper mapper )
         {
             this._useCase =useCase;
             this._mapper = mapper;

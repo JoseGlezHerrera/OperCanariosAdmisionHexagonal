@@ -4,7 +4,7 @@ using Oper.Admision.Application.UseCases.Visita.EliminarVisita;
 namespace Oper.Admision.Api.UseCases.Visitas.EliminarVisita
 {
     [ApiController]
-    [Route("api/visitas/[controller]")]
+    [Route("api/visitas/eliminar")]
     public class EliminarVisitaController : ControllerBase
     {
         private readonly EliminarVisitaUseCase _useCase;
