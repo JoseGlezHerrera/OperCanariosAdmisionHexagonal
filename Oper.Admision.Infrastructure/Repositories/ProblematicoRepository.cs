@@ -64,14 +64,26 @@ namespace Oper.Admision.Infrastructure.Repositories
         }
         public async Task<Problematico> InsertarProblematicoAsync(Problematico tipoProblematico, Socio socio)
         {
-            tipoProblematico.id_socio = socio.id_socio;
-            tipoProblematico.fecha_crea = DateTime.Now;
-            tipoProblematico.visible = true;
+            try
+            {
+                tipoProblematico.id_socio = socio.id_socio;
+                tipoProblematico.fecha_crea = DateTime.Now;
+                tipoProblematico.visible = true;
 
-            await _context.AddAsync(tipoProblematico);
-            await _context.SaveChangesAsync();
+                await _context.AddAsync(tipoProblematico);
+                await _context.SaveChangesAsync();
 
-            return tipoProblematico;
+                return tipoProblematico;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                var inner = dbEx.InnerException?.Message ?? dbEx.Message;
+                throw new Exception($"Error al guardar el Problematico en base de datos: {inner}", dbEx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error inesperado al insertar Problematico: " + ex.Message, ex);
+            }
         }
         public async Task<Problematico?> GetByIdAsync(int id)
         {

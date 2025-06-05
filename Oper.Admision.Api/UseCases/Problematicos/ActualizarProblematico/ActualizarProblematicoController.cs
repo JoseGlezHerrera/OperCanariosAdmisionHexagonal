@@ -27,7 +27,7 @@ public class ActualizarProblematicoController : ControllerBase
     public async Task<IActionResult> Actualizar(int id, [FromBody] ActualizarProblematicoRequest request)
     {
         var input = _mapper.Map<ActualizarProblematicoInput>(request) with { Id = id };
-        var result = await _useCase.Handle(input);
+        var result = await _useCase.Execute(input);
 
         if (!result)
             return NotFound();
@@ -35,4 +35,5 @@ public class ActualizarProblematicoController : ControllerBase
         var actualizado = await _repository.GetByIdAsync(id);
         return Ok(actualizado);
     }
+
 }

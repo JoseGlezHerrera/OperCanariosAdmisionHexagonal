@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Oper.Admision.Application.UseCases.Problematico.CrearProblematico;
+using Oper.Admision.Application.UseCases.Problematicos.CrearProblematico;
 using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Models;
 using static Oper.Admision.Domain.Models.Problematico;
@@ -17,7 +17,7 @@ public class CrearProblematicoUseCase
         _mapper = mapper;
     }
 
-    public async Task<Problematico> ExecuteAsync(CrearProblematicoInput input)
+    public async Task<CrearProblematicoOutput> Execute(CrearProblematicoInput input)
     {
         Validar(input);
 
@@ -30,7 +30,7 @@ public class CrearProblematicoUseCase
             id_socio = socio.id_socio, // Usamos el ID real
             id_sesion = input.IdSesion,
             id_sede = input.IdSede,
-            fecha_crea = input.FechaCreacion,
+            fecha_crea = input.FechaCreacion ?? DateTime.UtcNow,
             regla = input.Regla,
             comentario = input.Comentario,
             visible = true,
@@ -39,7 +39,10 @@ public class CrearProblematicoUseCase
             gobcan = input.TipoProblematico == (int)TipoProblematicoEnum.Gobcan
         };
 
-        return await _repo.InsertarProblematicoAsync(problematico, socio);
+        var creado = await _repo.InsertarProblematicoAsync(problematico, socio);
+        creado.Dni = socio.dni;
+        return _mapper.Map<CrearProblematicoOutput>(creado);
+
     }
     private void Validar(CrearProblematicoInput input)
     {

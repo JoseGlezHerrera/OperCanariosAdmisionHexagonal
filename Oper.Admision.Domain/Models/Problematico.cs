@@ -23,6 +23,8 @@ namespace Oper.Admision.Domain.Models
         public Nullable<int> id_socio { get; set; }
         public string comentario { get; set; }
         public bool visible { get; set; }
+        [NotMapped]
+        public string? Dni { get; set; }
         public enum TipoProblematicoEnum
         {
             Conflictivo = 1,

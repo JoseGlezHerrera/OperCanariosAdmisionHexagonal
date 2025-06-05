@@ -19,10 +19,13 @@ namespace Oper.Admision.Api.UseCases.Usuarios.GetTodosUsuario
             this._mapper = mapper;
         }
 
-        [HttpGet("GetTodos")]
-        public IActionResult GetTodos()
+        [HttpGet("todos")]
+        public async Task<IActionResult> GetTodos()
         {
-            return Ok(this._useCase.Execute());
+            var input = new GetTodosUsuarioInput();
+            var usuarios = await _useCase.Execute(input);
+            var response = _mapper.Map<List<GetTodosUsuarioResponse>>(usuarios);
+            return Ok(response);
         }
     }
 }

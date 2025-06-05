@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oper.Admision.Application.UseCases.Problematico.CrearProblematico
+namespace Oper.Admision.Application.UseCases.Problematicos.CrearProblematico
 {
     public class CrearProblematicoInput
     {
@@ -16,6 +16,6 @@ namespace Oper.Admision.Application.UseCases.Problematico.CrearProblematico
         public int IdSede { get; set; }
         public int IdSesion { get; set; }
         public int IdSocio { get; set; }
-        public DateTime FechaCreacion { get; set; } = DateTime.Now;
+        public DateTime? FechaCreacion { get; set; }
     }
 }

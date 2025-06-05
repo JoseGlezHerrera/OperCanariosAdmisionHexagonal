@@ -48,6 +48,7 @@ using Oper.Admision.Application.UseCases.Socios.ValidarSocio;
 using Oper.Admision.Infrastructure.Seguridad;
 using Oper.Admision.Domain;
 using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
+using Oper.Admision.Application.UseCases.Rol.GetRoles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -109,7 +110,7 @@ builder.Services.AddScoped<JwtGenerator>();
 builder.Services.AddScoped<LoginUsuarioUseCase>();
 builder.Services.AddScoped<IUsuarioApi, UsuarioApi>();
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddScoped<GetRolesUseCase>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
@@ -156,6 +157,7 @@ services.AddScoped<EliminarProblematicoUseCase>();
 services.AddScoped<FiltrarProblematicoPorTipoUseCase>();
 services.AddScoped<CrearUsuarioUseCase>();
 services.AddScoped<LoginUsuarioUseCase>();
+
 
 builder.Host.UseSerilog();
 

@@ -15,7 +15,7 @@ namespace Oper.Admision.Application.UseCases.Problematico.ActualizarProblematico
         {
             _repo = repo;
         }
-        public async Task<bool> Handle(ActualizarProblematicoInput input)
+        public async Task<bool> Execute(ActualizarProblematicoInput input)
         {
             var entity = await _repo.GetByIdAsync(input.Id);
             if (entity is null) return false;

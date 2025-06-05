@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Oper.Admision.Api.UseCases.Problematicos;
-using Oper.Admision.Application.UseCases.Problematico.CrearProblematico;
+using Oper.Admision.Application.UseCases.Problematicos.CrearProblematico;
 
 namespace Oper.Admision.Api.UseCases.Problematicos.CrearProblematico;
 
@@ -24,7 +24,7 @@ public class CrearProblematicoController : ControllerBase
     public async Task<IActionResult> Insertar([FromBody] CrearProblematicoRequest request)
     {
         var input = _mapper.Map<CrearProblematicoRequest, CrearProblematicoInput>(request);
-        var resultado = await _useCase.ExecuteAsync(input);
+        var resultado = await _useCase.Execute(input);
         var response = _mapper.Map<CrearProblematicoResponse>(resultado);
         return Ok(response);
     }

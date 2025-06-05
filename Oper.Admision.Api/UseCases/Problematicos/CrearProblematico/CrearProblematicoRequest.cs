@@ -1,8 +1,11 @@
-﻿namespace Oper.Admision.Api.UseCases.Problematicos.CrearProblematico
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Oper.Admision.Api.UseCases.Problematicos.CrearProblematico
 
 {
     public class CrearProblematicoRequest
     {
+        [Required]
         public string Dni { get; set; }
         public string Regla { get; set; }
         public string Comentario { get; set; }
