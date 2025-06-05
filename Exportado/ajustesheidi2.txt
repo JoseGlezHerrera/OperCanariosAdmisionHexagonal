@@ -1,0 +1,182 @@
+Updatecheck<|||>3<|||>1
+DoUsageStatistics<|||>3<|||>1
+UpdatecheckLastrun<|||>1<|||>2025-06-05 14:58:10
+LastUsageStatisticCall<|||>1<|||>2025-05-29 08:57:14
+SessionManager_WindowLeft<|||>3<|||>2333
+SessionManager_WindowTop<|||>3<|||>205
+ColWidths_connform.ListSessions<|||>1<|||>163,50,50,50,50,50,10
+ColsVisible_connform.ListSessions<|||>1<|||>0,1,4,6
+ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
+ColSort_connform.ListSessions<|||>1<|||>0,0
+MainWinOnMonitor<|||>3<|||>0
+MainWinWidth<|||>3<|||>1828
+MainWinHeight<|||>3<|||>936
+ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
+ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColPositions_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColSort_MainForm.ListDatabases<|||>1<|||>0,0
+ColWidths_MainForm.ListVariables<|||>1<|||>160,200,316
+ColsVisible_MainForm.ListVariables<|||>1<|||>0,1,2
+ColPositions_MainForm.ListVariables<|||>1<|||>0,1,2
+ColSort_MainForm.ListVariables<|||>1<|||>0,0
+ColWidths_MainForm.ListStatus<|||>1<|||>160,316,100,100
+ColsVisible_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColPositions_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColSort_MainForm.ListStatus<|||>1<|||>0,0
+ColWidths_MainForm.ListProcesses<|||>1<|||>70,80,80,80,80,50,50,186
+ColsVisible_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColPositions_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColSort_MainForm.ListProcesses<|||>1<|||>0,1
+ColWidths_MainForm.ListCommandStats<|||>1<|||>120,100,100,100,256
+ColsVisible_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColPositions_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColSort_MainForm.ListCommandStats<|||>1<|||>1,1
+ColWidths_MainForm.ListTables<|||>1<|||>120,70,70,120,120,70,100,50,70,70,70,70,70,90,120,70,70,70,50
+ColsVisible_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,18
+ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ColSort_MainForm.ListTables<|||>1<|||>0,0
+LastSessions<|||>1<|||>Localhost
+LastActiveSession<|||>1<|||>Localhost
+FileDialogEncoding_MainForm<|||>3<|||>0
+ColWidths_frmTableEditor.listColumns<|||>1<|||>45,161,154,90,60,120,50,117,130,140,100,100,50,50
+ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13
+ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13
+ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
+ColWidths_frmTableEditor.treeIndexes<|||>1<|||>231,100,80,120,80
+ColsVisible_frmTableEditor.treeIndexes<|||>1<|||>0,1,2,3,4
+ColPositions_frmTableEditor.treeIndexes<|||>1<|||>0,1,2,3,4
+ColSort_frmTableEditor.treeIndexes<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listForeignKeys<|||>1<|||>196,80,100,80,80,81
+ColsVisible_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColPositions_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColSort_frmTableEditor.listForeignKeys<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listCheckConstraints<|||>1<|||>200,417
+ColsVisible_frmTableEditor.listCheckConstraints<|||>1<|||>0,1
+ColPositions_frmTableEditor.listCheckConstraints<|||>1<|||>0,1
+ColSort_frmTableEditor.listCheckConstraints<|||>1<|||>-1,0
+querymemoheight<|||>3<|||>289
+dbtreewidth<|||>3<|||>364
+sqloutheight<|||>3<|||>178
+MainWinMaximized<|||>3<|||>1
+CreateDbCollation<|||>1<|||>utf8mb4_0900_ai_ci
+MainWinLeft<|||>3<|||>1998
+MainWinTop<|||>3<|||>58
+DateTimeEditor_CursorPos_Type4<|||>3<|||>5
+MemoEditorMaximized<|||>3<|||>1
+SessionManager_ListWidth<|||>3<|||>210
+ExportSQL_CreateDatabases<|||>3<|||>1
+ExportSQL_CreateTables<|||>3<|||>1
+ExportSQL_DataHow<|||>3<|||>2
+ExportSQL_Filenames<|||>1<|||>C:\Users\Usuario\Desktop\exportarheidi.sql<{{{><}}}>C:\Users\Usuario\Desktop\export.sql<{{{><}}}>exportbdd<{{{><}}}>
+TableTools_WindowWidth<|||>3<|||>1076
+SQLFile0<|||>1<|||>C:\Users\Usuario\AppData\Roaming\HeidiSQL\Backups\query-tab-2025-02-26_08-56-22-780.sql
+Servers\Localhost\SessionCreated<|||>1<|||>2025-02-20 11:05:18
+Servers\Localhost\Host<|||>1<|||>127.0.0.1
+Servers\Localhost\WindowsAuth<|||>3<|||>0
+Servers\Localhost\CleartextPluginEnabled<|||>3<|||>0
+Servers\Localhost\User<|||>1<|||>root
+Servers\Localhost\Password<|||>1<|||>6764716C686F72796C6E3
+Servers\Localhost\LoginPrompt<|||>3<|||>0
+Servers\Localhost\Port<|||>1<|||>3306
+Servers\Localhost\NetType<|||>3<|||>0
+Servers\Localhost\Compressed<|||>3<|||>0
+Servers\Localhost\LocalTimeZone<|||>3<|||>0
+Servers\Localhost\QueryTimeout<|||>3<|||>30
+Servers\Localhost\KeepAlive<|||>3<|||>20
+Servers\Localhost\FullTableStatus<|||>3<|||>1
+Servers\Localhost\Databases<|||>1<|||>
+Servers\Localhost\Library<|||>1<|||>libmariadb.dll
+Servers\Localhost\Comment<|||>1<|||>
+Servers\Localhost\StartupScriptFilename<|||>1<|||>
+Servers\Localhost\TreeBackground<|||>3<|||>536870911
+Servers\Localhost\SSHtunnelActive<|||>3<|||>0
+Servers\Localhost\SshExecutable<|||>1<|||>
+Servers\Localhost\SSHtunnelHost<|||>1<|||>
+Servers\Localhost\SSHtunnelHostPort<|||>3<|||>22
+Servers\Localhost\SSHtunnelUser<|||>1<|||>
+Servers\Localhost\SSHtunnelPassword<|||>1<|||>2
+Servers\Localhost\SSHtunnelTimeout<|||>3<|||>4
+Servers\Localhost\SSHtunnelPrivateKey<|||>1<|||>
+Servers\Localhost\SSHtunnelPort<|||>3<|||>3307
+Servers\Localhost\SSL_Active<|||>3<|||>0
+Servers\Localhost\SSL_Key<|||>1<|||>
+Servers\Localhost\SSL_Cert<|||>1<|||>
+Servers\Localhost\SSL_CA<|||>1<|||>
+Servers\Localhost\SSL_Cipher<|||>1<|||>
+Servers\Localhost\SSL_Verification<|||>3<|||>2
+Servers\Localhost\IgnoreDatabasePattern<|||>1<|||>
+Servers\Localhost\LogFileDdl<|||>3<|||>0
+Servers\Localhost\LogFileDml<|||>3<|||>0
+Servers\Localhost\LogFilePath<|||>1<|||>C:\Users\Usuario\AppData\Roaming\HeidiSQL\Logs\%session\%db\%y%m%d.sql
+Servers\Localhost\ServerVersionFull<|||>1<|||>8.0.41 - MySQL Community Server - GPL
+Servers\Localhost\ConnectCount<|||>3<|||>58
+Servers\Localhost\ServerVersion<|||>3<|||>80041
+Servers\Localhost\LastConnect<|||>1<|||>2025-06-05 08:54:51
+Servers\Localhost\lastUsedDB<|||>1<|||>admision
+Servers\Localhost\admision|usuarios\Sort<|||>1<|||>1_Eliminado|
+Servers\Localhost\QueryHistory\3<|||>1<|||>2025-05-07 13:55:23|admision|15|SELECT * FROM reglasconflictivos 
+Servers\Localhost\QueryHistory\4<|||>1<|||>2025-05-12 14:26:59|josecarlosprueba|0|SELECT * FROM usuarios 
+Servers\Localhost\QueryHistory\6<|||>1<|||>2025-05-14 09:52:36|josecarlosprueba|47|ALTER TABLE usuarios<{{{><}}}>ADD COLUMN id_usuario INT PRIMARY KEY AUTO_INCREMENT;
+Servers\Localhost\QueryHistory\8<|||>1<|||>2025-05-15 10:23:30|josecarlosprueba|0|SELECT * from usuarios
+Servers\Localhost\QueryHistory\7<|||>1<|||>2025-05-15 11:51:44|josecarlosprueba|94|ALTER TABLE Usuarios<{{{><}}}>ADD CONSTRAINT FK_Usuarios_Roles<{{{><}}}>FOREIGN KEY (RolId) REFERENCES Roles(RolId);
+Servers\Localhost\QueryHistory\9<|||>1<|||>2025-05-15 12:18:26|josecarlosprueba|0|INSERT INTO roles (RolID, Nombre)<{{{><}}}>VALUES (1, 'Administrador');
+Servers\Localhost\QueryHistory\10<|||>1<|||>2025-05-15 12:18:33|josecarlosprueba|16|INSERT INTO roles (RolID, Nombre)<{{{><}}}>VALUES (2, 'Usuario');
+Servers\Localhost\QueryHistory\16<|||>1<|||>2025-05-15 12:45:10|josecarlosprueba|0|SELECT * FROM roles WHERE RolID = 1;
+Servers\Localhost\QueryHistory\17<|||>1<|||>2025-05-15 12:53:20|josecarlosprueba|0|SELECT * FROM usuarios WHERE RolID IS NULL;
+Servers\Localhost\QueryHistory\18<|||>1<|||>2025-05-15 12:53:40|josecarlosprueba|0|DELETE FROM usuarios WHERE RolID IS NULL;
+Servers\Localhost\QueryHistory\19<|||>1<|||>2025-05-15 12:54:05|josecarlosprueba|78|ALTER TABLE usuarios<{{{><}}}>  CHANGE COLUMN RolID RolID INT NOT NULL AFTER id_usuario;<{{{><}}}>
+Servers\Localhost\QueryHistory\12<|||>1<|||>2025-05-15 12:58:55|josecarlosprueba|0|SHOW CREATE TABLE roles;
+Servers\Localhost\QueryHistory\23<|||>1<|||>2025-05-15 13:01:57|josecarlosprueba|16|ALTER TABLE usuarios DROP FOREIGN KEY FK_Usuarios_Roles;<{{{><}}}>
+Servers\Localhost\QueryHistory\15<|||>1<|||>2025-05-15 13:02:02|josecarlosprueba|15|ALTER TABLE roles MODIFY RolID INT NOT NULL;<{{{><}}}>
+Servers\Localhost\QueryHistory\22<|||>1<|||>2025-05-15 13:02:08|josecarlosprueba|0|SELECT * FROM roles;<{{{><}}}>
+Servers\Localhost\QueryHistory\24<|||>1<|||>2025-05-15 13:02:19|josecarlosprueba|110|ALTER TABLE usuarios <{{{><}}}>ADD CONSTRAINT FK_Usuarios_Roles <{{{><}}}>FOREIGN KEY (RolID) REFERENCES roles(RolID);<{{{><}}}>
+Servers\Localhost\QueryHistory\21<|||>1<|||>2025-05-15 13:03:06|josecarlosprueba|0|SHOW CREATE TABLE roles;<{{{><}}}>
+Servers\Localhost\QueryHistory\27<|||>1<|||>2025-05-15 13:10:52|josecarlosprueba|0|DESCRIBE usuarios;<{{{><}}}>
+Servers\Localhost\QueryHistory\25<|||>1<|||>2025-05-15 13:14:22|josecarlosprueba|0|SHOW CREATE TABLE usuarios;<{{{><}}}>
+Servers\Localhost\QueryHistory\13<|||>1<|||>2025-05-15 13:14:44|josecarlosprueba|15|SELECT * FROM roles WHERE RolID = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\26<|||>1<|||>2025-05-15 13:14:55|josecarlosprueba|15|INSERT INTO usuarios (Nombre_Usuario, Email_Usuario, Edad_Usuario, Dni_Usuario, contrasenia, RolID)<{{{><}}}>VALUES ('TestUser', 'test@example.com', 25, '987654321B', 'pass123', 1);<{{{><}}}>
+Servers\Localhost\QueryHistory\11<|||>1<|||>2025-05-22 10:00:30|admision|16|INSERT INTO problematicos (<{{{><}}}>    id_sede, id_sesion, regla, conflictivo, prohibida_entrada, gobcan,<{{{><}}}>    fecha_crea, id_socio, comentario, visible<{{{><}}}>) VALUES (<{{{><}}}>    1,            -- id_sede<{{{><}}}>    999,          -- id_sesion (puedes cambiarlo)<{{{><}}}>    'ReglaTest',  -- regla<{{{><}}}>    0,            -- conflictivo<{{{><}}}>    0,            -- prohibida_entrada<{{{><}}}>    1,            -- gobcan<{{{><}}}>    NOW(),        -- fecha_crea<{{{><}}}>    10,            -- id_socio (usa uno válido de la tabla socios)<{{{><}}}>    'Comentario de prueba',<{{{><}}}>    1             -- visible<{{{><}}}>);<{{{><}}}>
+Servers\Localhost\QueryHistory\30<|||>1<|||>2025-05-22 12:03:26|admision|0|SELECT * FROM socios WHERE dni IS NULL;
+Servers\Localhost\QueryHistory\29<|||>1<|||>2025-05-22 12:07:24|admision|0|SELECT <{{{><}}}>  COUNT(*) AS Total,<{{{><}}}>  COUNT(prohibida_entrada) AS NoNulos,<{{{><}}}>  SUM(prohibida_entrada = 1) AS Prohibidos<{{{><}}}>FROM socios;
+Servers\Localhost\QueryHistory\33<|||>1<|||>2025-05-27 11:38:30|admision|0|SELECT * FROM sesiones<{{{><}}}>
+Servers\Localhost\QueryHistory\34<|||>1<|||>2025-05-27 11:55:06|admision|0|SELECT * FROM sedes WHERE id_sede = 1;
+Servers\Localhost\QueryHistory\38<|||>1<|||>2025-05-27 12:25:58|admision|0|SELECT * FROM sesiones WHERE id_sede NOT IN (SELECT id_sede FROM sedes);<{{{><}}}>
+Servers\Localhost\QueryHistory\39<|||>1<|||>2025-05-27 12:26:25|admision|0|DELETE FROM sesiones WHERE id_sede NOT IN (SELECT id_sede FROM sedes);<{{{><}}}>
+Servers\Localhost\QueryHistory\37<|||>1<|||>2025-05-27 12:27:55|admision|0|SELECT * FROM sedes;<{{{><}}}>
+Servers\Localhost\QueryHistory\36<|||>1<|||>2025-05-27 12:27:59|admision|0|SELECT * FROM sesiones;
+Servers\Localhost\QueryHistory\35<|||>1<|||>2025-05-27 12:28:57|admision|0|SELECT * FROM sedes WHERE id_sede = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\40<|||>1<|||>2025-05-28 09:42:38|admision|0|SELECT * FROM problematicos<{{{><}}}>
+Servers\Localhost\QueryHistory\41<|||>1<|||>2025-05-28 10:15:52|admision|0|SELECT * FROM usuarios<{{{><}}}>
+Servers\Localhost\QueryHistory\42<|||>1<|||>2025-05-28 10:23:17|admision|0|SELECT * FROM usuarios WHERE Eliminado = 0;
+Servers\Localhost\QueryHistory\43<|||>1<|||>2025-05-28 12:45:11|admision|62|ALTER TABLE visitas ADD COLUMN motivo VARCHAR(255);
+Servers\Localhost\QueryHistory\44<|||>1<|||>2025-05-28 13:13:46|admision|16|SELECT id_sesion FROM sesiones;
+Servers\Localhost\QueryHistory\14<|||>1<|||>2025-05-28 13:15:32|admision|0|SELECT * FROM sesiones WHERE id_sesion = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\20<|||>1<|||>2025-05-29 09:35:23|admision|0|SELECT * FROM visitas<{{{><}}}>
+Servers\Localhost\QueryHistory\48<|||>1<|||>2025-05-29 12:20:53|admision|15|SELECT id_sesion FROM sesiones WHERE id_sesion = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\49<|||>1<|||>2025-05-29 12:21:03|admision|0|SELECT id_sede FROM sedes WHERE id_sede = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\51<|||>1<|||>2025-05-29 14:11:26|admision|0|SELECT * FROM problematicos WHERE id_problematicos = 23;<{{{><}}}>
+Servers\Localhost\QueryHistory\45<|||>1<|||>2025-05-29 14:11:29|admision|0|SELECT * FROM problematicos WHERE id_problematicos = 2;<{{{><}}}>
+Servers\Localhost\QueryHistory\52<|||>1<|||>2025-05-29 14:11:35|admision|0|SELECT * FROM problematicos WHERE id_problematicos = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\53<|||>1<|||>2025-05-29 14:22:20|admision|0|SELECT * FROM problematicos<{{{><}}}><{{{><}}}>
+Servers\Localhost\QueryHistory\54<|||>1<|||>2025-05-29 14:22:35|admision|0|SELECT * FROM problematicos WHERE conflictivo = 1;<{{{><}}}>
+Servers\Localhost\QueryHistory\56<|||>1<|||>2025-05-29 14:24:57|admision|0|UPDATE socios<{{{><}}}>SET fecha_nacimiento = CURDATE()<{{{><}}}>WHERE id_socio = 1;
+Servers\Localhost\QueryHistory\50<|||>1<|||>2025-06-02 14:45:30|admision|0|SELECT * FROM usuarios WHERE nombre = 'Jose';
+Servers\Localhost\QueryHistory\57<|||>1<|||>2025-06-02 14:48:53|admision|0|UPDATE usuarios<{{{><}}}>SET password = 'gvkMJH6rRdw='<{{{><}}}>WHERE id_usuario = 187;
+Servers\Localhost\QueryHistory\32<|||>1<|||>2025-06-03 10:34:59|admision|0|SELECT Nombre, Password<{{{><}}}>FROM usuarios<{{{><}}}>WHERE Nombre = 'Jose';<{{{><}}}>
+Servers\Localhost\QueryHistory\58<|||>1<|||>2025-06-04 09:05:00|admision|0|SELECT * FROM cumples
+Servers\Localhost\QueryHistory\5<|||>1<|||>2025-06-04 09:05:06|admision|0|SELECT * FROM establecimientos
+Servers\Localhost\QueryHistory\62<|||>1<|||>2025-06-04 09:05:48|admision|0|SELECT * FROM roles
+Servers\Localhost\QueryHistory\28<|||>1<|||>2025-06-04 09:05:54|admision|0|SELECT * FROM sedes
+Servers\Localhost\QueryHistory\46<|||>1<|||>2025-06-04 09:52:34|admision|0|INSERT INTO usuarios (Dni, Nombre, Email, Password, id_rol, fecha_update, fecha_creacion)<{{{><}}}>VALUES (<{{{><}}}>  '123456789B',<{{{><}}}>  'Jose',<{{{><}}}>  'jc@gmail.com',<{{{><}}}>  '81dc9bdb52d04dc20036dbd8313ed055',<{{{><}}}>  1,<{{{><}}}>  NOW(),<{{{><}}}>  NOW()<{{{><}}}>);
+Servers\Localhost\QueryHistory\63<|||>1<|||>2025-06-04 10:02:32|admision|0|SELECT Nombre, Password, Eliminado FROM usuarios;<{{{><}}}>
+Servers\Localhost\QueryHistory\55<|||>1<|||>2025-06-04 10:27:57|admision|0|SELECT id_usuario, Nombre, Password, Eliminado FROM usuarios WHERE Nombre = 'Jose';<{{{><}}}>
+Servers\Localhost\QueryHistory\64<|||>1<|||>2025-06-04 10:28:19|admision|0|SELECT Nombre, Password FROM usuarios WHERE Nombre = 'Jose';<{{{><}}}>
+Servers\Localhost\QueryHistory\65<|||>1<|||>2025-06-04 10:29:48|admision|0|INSERT INTO usuarios <{{{><}}}>(Nombre, Password, Alias, Email, id_rol, Eliminado, Bloqueado, fecha_creacion, fecha_update)<{{{><}}}>VALUES <{{{><}}}>('Jose', 'rUwVkuJZk7izSFLFVcrH6g==', 'joseg', 'jose@dominio.com', 1, 0, 0, NOW(), NOW());<{{{><}}}>
+Servers\Localhost\QueryHistory\66<|||>1<|||>2025-06-04 10:44:54|admision|0|UPDATE usuarios<{{{><}}}>SET Password = 'gvkMJH6rRdw='<{{{><}}}>WHERE Nombre = 'Jose';
+Servers\Localhost\QueryHistory\1<|||>1<|||>2025-06-05 11:03:48|admision|0|SELECT * FROM visitas
+Servers\Localhost\QueryHistory\67<|||>1<|||>2025-06-05 11:11:03|admision|0|SELECT * FROM reglasconflictivos
+Servers\Localhost\QueryHistory\61<|||>1<|||>2025-06-05 11:11:09|admision|0|SELECT * FROM prohibidos
+Servers\Localhost\QueryHistory\60<|||>1<|||>2025-06-05 13:03:46|admision|0|SELECT * FROM socios
+Servers\Localhost\QueryHistory\59<|||>1<|||>2025-06-05 13:03:55|admision|0|SELECT * FROM sesiones
+Servers\Localhost\QueryHistory\47<|||>1<|||>2025-06-05 13:04:11|admision|0|SELECT * FROM problematicos
+Servers\Localhost\QueryHistory\31<|||>1<|||>2025-06-05 13:26:24|admision|0|SELECT * FROM usuarios

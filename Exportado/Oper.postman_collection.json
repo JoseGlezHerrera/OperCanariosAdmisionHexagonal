@@ -1,0 +1,854 @@
+{
+	"info": {
+		"_postman_id": "6c057c40-95e9-47c4-b75a-6bac55362b42",
+		"name": "Oper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41198137"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"12121212U\",\r\n  \"nombre\": \"Admin\",\r\n  \"email\": \"admin\",\r\n  \"rolId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Usuario/Crear\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Usuario",
+								"Crear\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todos Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MTU3N2U0ZC1mNTNjLTQ3MDAtOGUyYS01MWYzNTdjN2IwY2EiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ3OTAyOTUxLCJleHAiOjE3NDc5MzE3NTEsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.RXvm6IqAx-Ql8pDvxCFv_r1C-tvxS7EpSlDogJdsnWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Usuario/GetTodos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Usuario",
+								"GetTodos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"usuario\": \"admin\",\r\n  \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Usuario/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombreUsuario\": \"josecarlos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Usuario/logout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Usuario",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"203\",\r\n  \"nombre\": \"Nuevo Nombre\",\r\n  \"alias\": \"nuevoalias\",\r\n  \"rolId\": \"GUID_DEL_ROL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Usuario/editar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Usuario",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar Contraseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDdkMzc0Ni01ZmFkLTRmZTEtOTFiOC0yZGVmMjM1MGUzOWQiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ4ODcxNTcwLCJleHAiOjE3NDg5MDAzNzAsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.eWILjol3jaF9cI3IMxeka9bF04Ya_zIMcImgo5c85Bo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UsuarioId\": 155,\r\n    \"password\": \"nuevo1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/usuario/CambiarPassword",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"usuario",
+								"CambiarPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Socio",
+			"item": [
+				{
+					"name": "Crear Socio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"9894930L\",\r\n  \"id_socio\":\"1\",\r\n  \"nombre\": \"Fabricio\",\r\n  \"apel1\":\"Furbi\",\r\n  \"apel2\":\"Furbito\",\r\n  \"calle\":\"avenida n2\",\r\n  \"telefono\":\"765834840\",\r\n  \"comentario\":\"To buena gente\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Socio/CrearSocio",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Socio",
+								"CrearSocio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Socios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Socio/GetSocios",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Socio",
+								"GetSocios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Socio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "     {\r\n         \"id_socio\": 10,\r\n         \"dni\": \"12345678A\",\r\n         \"nombre\": \"Jose Carlos\",\r\n         \"apel1\": \"González\",\r\n         \"apel2\": \"Herrera\"\r\n     }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Socio/Editar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Socio",
+								"Editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Socio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Socios/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Socios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Socio Por ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Socio Prohibido",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/GetSocioProhibido",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"GetSocioProhibido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cumpleañeros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Socio/CumplesHoy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Socio",
+								"CumplesHoy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar Socio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/ValidarSocio",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"ValidarSocio"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Visita",
+			"item": [
+				{
+					"name": "Crear Visita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "     {\r\n         \"id_visita\": 1,\r\n         \"id_socio\": 123\r\n       //  \"id_sesion\": 456,\r\n      //   \"id_sede\": 789\r\n     }\r\n     ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Vista/CrearVisita",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Vista",
+								"CrearVisita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Visitas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Visita/GetVisitas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Visita",
+								"GetVisitas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Visita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"socioId\": 12,\r\n  \"sesionId\": 33\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/RegistrarVisita",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"RegistrarVisita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Visita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idVisita\": 31,\r\n  \"fecha\": \"2025-06-20T12:00:00\",\r\n  \"idSesion\": 1,\r\n  \"motivo\": \"Reprogramación de la sesión\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Visitas/ActualizarVisita",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Visitas",
+								"ActualizarVisita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Visita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/Visita/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Visita",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Visitas por Socio Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4OTE5ZWIzMi0wNTY2LTRkZjctYjgyNC0wYTBiNGY0ZDZmOWMiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ4NTExODQ0LCJleHAiOjE3NDg1NDA2NDQsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.Fk5zThJBnwK5quUao1edesWq_G0BrG3rMqWlmUsd7aA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/visitas/por-socio/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"visitas",
+								"por-socio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Visitas por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/visitas/por-id/33",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"visitas",
+								"por-id",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Visitas por Fecha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNDZjNGQ4OS01N2FjLTRlZWUtOGM3Ni05MmMyZjgzMzE0YjciLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ4NTEwMTUxLCJleHAiOjE3NDg1Mzg5NTEsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.PM16WMYgJiL1HFWWvcDnsi0kV2j64Y5mR6UVmvWQ6Ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/visitas/ObtenerVisitasPorFecha/2025-06-01",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"visitas",
+								"ObtenerVisitasPorFecha",
+								"2025-06-01"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Problematico",
+			"item": [
+				{
+					"name": "Crear Problematico",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MTU3N2U0ZC1mNTNjLTQ3MDAtOGUyYS01MWYzNTdjN2IwY2EiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ3OTAyOTUxLCJleHAiOjE3NDc5MzE3NTEsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.RXvm6IqAx-Ql8pDvxCFv_r1C-tvxS7EpSlDogJdsnWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"12345678A\",\r\n  \"regla\": \"Regla de ejemplo\",\r\n  \"comentario\": \"Comentario de prueba\",\r\n  \"tipoProblematico\": 1,\r\n  \"idSede\": 1,\r\n  \"idSesion\": 2,\r\n  \"idSocio\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/problematicos/InsertarProblematico",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"problematicos",
+								"InsertarProblematico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Problematicos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MTU3N2U0ZC1mNTNjLTQ3MDAtOGUyYS01MWYzNTdjN2IwY2EiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ3OTAyOTUxLCJleHAiOjE3NDc5MzE3NTEsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.RXvm6IqAx-Ql8pDvxCFv_r1C-tvxS7EpSlDogJdsnWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/problematicos/GetProblematicos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"problematicos",
+								"GetProblematicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Problematico por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/problematicos/15",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"problematicos",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Problematico",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0Y2Q0ODZjYy1lZTRjLTRhM2ItYjJkOS0zMGQ0ZmQ4ODhiMDUiLCJVc3VhcmlvSWQiOiIwIiwibmJmIjoxNzQ4MjQ2NzYxLCJleHAiOjE3NDgyNzU1NjEsImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjEwLjQ0OjUwOTAiLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMC40NDo1MDkwIn0.YSOLOBNLbRTkfMgw-l9bvLF_c2htNohLFsm59ECcQjg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/problematicos/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"problematicos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Problematico",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por tipo de Problematico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7281/api/problematicos/filtrar?tipo=Conflictivo",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"problematicos",
+								"filtrar"
+							],
+							"query": [
+								{
+									"key": "tipo",
+									"value": "Conflictivo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sesion",
+			"item": [
+				{
+					"name": "Crear Sesion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n         \"id_sesion\": 1,\r\n\r\n     }\r\n     ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7281/api/Vista/CrearSesion",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7281",
+							"path": [
+								"api",
+								"Vista",
+								"CrearSesion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Obtener Roles",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
