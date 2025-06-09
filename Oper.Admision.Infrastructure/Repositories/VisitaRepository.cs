@@ -40,14 +40,11 @@ namespace Oper.Admision.Infrastructure.Repositories
             }
         }
 
-        public async Task EliminarAsync(int id)
+        public async Task<int> EliminarAsync(int id)
         {
-            var visita = await _context.Visita.FindAsync(id);
-            if (visita != null)
-            {
-                _context.Visita.Remove(visita);
-                await _context.SaveChangesAsync();
-            }
+            return await _context.Visita
+                .Where(v => v.id_visita == id)
+                .ExecuteDeleteAsync();
         }
         public async Task<List<Visita>> ObtenerTodasAsync()
         {

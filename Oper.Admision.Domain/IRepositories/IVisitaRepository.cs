@@ -8,7 +8,7 @@ namespace Oper.Admision.Domain.IRepositories
         Task<List<Visita>> ObtenerPorSocioIdAsync(int socioId);
         Task AgregarAsync(Visita visita);
         Task ActualizarAsync(Visita visita);
-        Task EliminarAsync(int id);
+        Task<int> EliminarAsync(int id);
         Task<List<Visita>> ObtenerTodasAsync();
         Task<List<Visita>> ObtenerPorFechaAsync(DateTime fecha);
         Task InsertAsync(Visita visita);

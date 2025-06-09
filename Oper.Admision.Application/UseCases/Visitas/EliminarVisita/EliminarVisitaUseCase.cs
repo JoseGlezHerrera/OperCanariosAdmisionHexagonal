@@ -11,9 +11,14 @@ namespace Oper.Admision.Application.UseCases.Visita.EliminarVisita
             _visitaRepository = visitaRepository;
         }
 
-        public async Task EjecutarAsync(EliminarVisitaInput input)
+        public async Task<string> EjecutarAsync(EliminarVisitaInput input)
         {
-            await _visitaRepository.EliminarAsync(input.Id);
+            var resultado = await _visitaRepository.EliminarAsync(input.Id);
+
+            if (resultado > 0)
+                return $"Visita {input.Id} eliminada correctamente.";
+            else
+                return $"No se encontró ninguna visita con ID {input.Id}.";
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Oper.Admision.Api.UseCases.Socios.EliminarSocio
         {
             var input = new EliminarSocioInput(id);
             await _useCase.EjecutarAsync(input);
-            return NoContent(); // 204 No Content
+            return Ok(new { mensaje = $"Socio {input.Id} eliminado correctamente." });
 
         }
     }

@@ -6,7 +6,6 @@ namespace Oper.Admision.Api.UseCases.Sesiones.GetSesion
 {
     [Route("api/sesiones")]
     [ApiController]
-
     public class GetSesionController : ControllerBase
     {
         private readonly GetSesionUseCase _useCase;
@@ -14,15 +13,16 @@ namespace Oper.Admision.Api.UseCases.Sesiones.GetSesion
 
         public GetSesionController(GetSesionUseCase useCase, IMapper mapper)
         {
-            this._useCase = useCase;
-            this._mapper = mapper;
+            _useCase = useCase;
+            _mapper = mapper;
         }
 
-        [HttpGet("GetVisitas")]
-
-        public IActionResult GetSesion()
+        [HttpGet("GetSesion")]
+        public async Task<IActionResult> GetSesion()
         {
-            return Ok(this._useCase.Execute());
+            var input = new GetSesionInput();
+            var output = await _useCase.Execute(input);
+            return Ok(output);
         }
     }
 }

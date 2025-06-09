@@ -15,10 +15,11 @@ namespace Oper.Admision.Api.UseCases.Visitas.EliminarVisita
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> EliminarVisita(int id)
         {
-            await _useCase.EjecutarAsync(new EliminarVisitaInput(id));
-            return NoContent();
+            var input = new EliminarVisitaInput(id);
+            var mensaje = await _useCase.EjecutarAsync(input);
+            return Ok(new { message = mensaje });
         }
     }
 }

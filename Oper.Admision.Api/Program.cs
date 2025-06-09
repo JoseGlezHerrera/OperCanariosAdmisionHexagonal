@@ -34,7 +34,6 @@ using Log = Serilog.Log;
 using Oper.Admision.Application.UseCases.Visitas.CrearVisita;
 using Oper.Admision.Application.UseCases.Socios.EliminarSocio;
 using Oper.Admision.Application.UseCases.Socios.ObtenerSocioPorId;
-using Oper.Admision.Application.UseCases.Visitas.ListarVisitasPorSocio;
 using Oper.Admision.Application.UseCases.Visitas.ActualizarVisita;
 using Oper.Admision.Application.UseCases.Visitas.ObtenerVisitaPorId;
 using Oper.Admision.Api.UseCases.Visitas.ObtenerVisitaPorId;
@@ -49,6 +48,7 @@ using Oper.Admision.Infrastructure.Seguridad;
 using Oper.Admision.Domain;
 using Oper.Admision.Application.UseCases.Usuarios.CambiarPassword;
 using Oper.Admision.Application.UseCases.Rol.GetRoles;
+using Oper.Admision.Application.UseCases.Visitas.GetVisitasPorSocioId;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,7 +96,7 @@ builder.Services.AddScoped<ObtenerSocioPorIdUseCase>();
 builder.Services.AddScoped<CrearVisitaUseCase>();
 builder.Services.AddScoped<ActualizarVisitaUseCase>();
 builder.Services.AddScoped<EliminarVisitaUseCase>();
-builder.Services.AddScoped<ListarVisitasPorSocioUseCase>();
+builder.Services.AddScoped<GetVisitasPorSocioIdUseCase>();
 builder.Services.AddScoped<ObtenerVisitaPorIdUseCase>();
 builder.Services.AddScoped<ObtenerVisitasPorFechaUseCase>();
 builder.Services.AddScoped<ActualizarProblematicoUseCase>();

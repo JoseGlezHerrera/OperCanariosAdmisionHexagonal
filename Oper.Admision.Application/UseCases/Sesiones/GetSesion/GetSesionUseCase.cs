@@ -1,42 +1,29 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Oper.Admision.Domain.IRepositories;
-using Oper.Admision.Domain;
-using Oper.Admision.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Oper.Admision.Application.UseCases.Sesiones.GetSesion;
 
 namespace Oper.Admision.Application.UseCases.Sesiones.GetSesion
 {
     public class GetSesionUseCase
     {
+        private readonly ISesionRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IGestionUOW _uow;
-        private readonly ISesionRepository _SesionRepository;
-        private readonly ILogger<GetSesionUseCase> _logger;
 
-        public GetSesionUseCase(IMapper mapper, IGestionUOW uow, ISesionRepository SesionRepository, ILogger<GetSesionUseCase> logger)
+        public GetSesionUseCase(ISesionRepository repository, IMapper mapper)
         {
-            this._uow = uow;
-            this._SesionRepository = SesionRepository;
-            this._logger = logger;
-            this._mapper = mapper;
+            _repository = repository;
+            _mapper = mapper;
         }
 
-        public ICollection<GetSesionOutput> Execute()
+        public Task<GetSesionOutput> Execute(GetSesionInput input)
         {
-            var entidades = this._SesionRepository.GetAll();
-            this._logger.LogInformation($"Get Sesion- Nº: {entidades.Count}");
-            return this.BuildOutPut(entidades);
-        }
+            var sesion = _repository.Get(1);
 
-        private ICollection<GetSesionOutput> BuildOutPut(ICollection<Sesion> sessions)
-        {
-            var resultado = this._mapper.Map<ICollection<Sesion>, ICollection<GetSesionOutput>>(sessions);
-            return resultado;
+            if (sesion == null)
+                throw new Exception("Sesión no encontrada.");
+
+            var output = _mapper.Map<GetSesionOutput>(sesion);
+            return Task.FromResult(output);
         }
     }
 }
