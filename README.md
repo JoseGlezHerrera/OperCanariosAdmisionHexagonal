@@ -56,7 +56,7 @@ Oper.Admision
   - Login
   - Crear socio
   - Obtener visitas por socio
-  - Eliminar visita (devuelve mensaje profesional)
+  - Eliminar visita
 
 ---
 
