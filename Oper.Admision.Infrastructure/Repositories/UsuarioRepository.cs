@@ -16,12 +16,10 @@ namespace Oper.Admision.Infrastructure.Repositories
             this._context = context;
             this._logger = logger;
         }
-
         public Usuario? Get(int usuarioId)
         {
             return this._context.Usuarios.FirstOrDefault(u => u.UsuarioId == usuarioId);
         }
-
         public ICollection<Usuario> GetAll()
         {
             return this._context.Usuarios
@@ -41,25 +39,21 @@ namespace Oper.Admision.Infrastructure.Repositories
                 })
                 .ToList();
         }
-
         public void Create(Usuario usuario)
         {
             
             this._context.Usuarios.Add(usuario);
         }
-
         public void Update(Usuario usuario)
         {
             this._context.Entry(usuario).State = EntityState.Modified;
         }
-
         public void Delete(int usuarioId)
         {
             var entidad = this.Get(usuarioId);
             entidad.Eliminado = true;
             this._context.Entry(entidad).State = EntityState.Modified;
         }
-
         public bool ExisteNombre(int? usuarioId, string nombre)
         {
             if (!usuarioId.HasValue)
@@ -67,7 +61,6 @@ namespace Oper.Admision.Infrastructure.Repositories
             else
                 return this._context.Usuarios.Any(u => u.Nombre == nombre && !u.Eliminado && u.UsuarioId == usuarioId);
         }
-
         public Usuario? Login(string nombre, string passwordEncriptada)
         {
             var usuario = _context.Usuarios
@@ -85,7 +78,6 @@ namespace Oper.Admision.Infrastructure.Repositories
 
             return usuario;
         }
-
         public Usuario? Get(string email)
         {
             if (this.ExisteEmail(email))
@@ -97,22 +89,27 @@ namespace Oper.Admision.Infrastructure.Repositories
                 return null;
             }
         }
-
         public bool ExisteEmail(string email)
         {
             return this._context.Usuarios.Any(u => u.Email == email);
         }
-
         public bool ExisteNombre(string nombre)
         {
             throw new NotImplementedException();
         }
-
         public async Task<Usuario?> ObtenerPorNombreAsync(string nombreUsuario)
         {
             return await _context.Usuarios
                 .Include(u => u.Rol)
                 .FirstOrDefaultAsync(u => u.Nombre == nombreUsuario);
+        }
+        public bool ExisteDni(string dni)
+        {
+            return _context.Usuarios.Any(u => u.Dni == dni);
+        }
+        public bool ExisteDniParaOtroUsuario(int usuarioId, string dni)
+        {
+            return _context.Usuarios.Any(u => u.Dni == dni && u.UsuarioId != usuarioId);
         }
     }
 }

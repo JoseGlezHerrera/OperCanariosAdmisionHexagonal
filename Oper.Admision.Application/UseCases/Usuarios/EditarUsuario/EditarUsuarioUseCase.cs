@@ -25,7 +25,7 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Editar
             if (input == null) throw new ArgumentInputException(Mensaje.Usuario_Input);
             if (input.UsuarioId == 0) throw new ArgumentInputException(Mensaje.Requerido("UsuarioId"));
             if (string.IsNullOrEmpty(input.Dni)) throw new ArgumentInputException(Mensaje.Requerido("Dni"));
-            if (this._usuarioRepository.ExisteNombre(input.UsuarioId, input.Dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.Dni));
+            if (this._usuarioRepository.ExisteDniParaOtroUsuario(input.UsuarioId, input.Dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.Dni));
             if (string.IsNullOrEmpty(input.Nombre)) throw new ArgumentInputException(Mensaje.Requerido("Nombre"));
             if (string.IsNullOrEmpty(input.Email)) throw new ArgumentInputException(Mensaje.Requerido("Email"));
             if (input.RolId == 0) throw new ArgumentInputException(Mensaje.Requerido("Rol"));

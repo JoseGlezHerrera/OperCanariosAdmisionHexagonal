@@ -33,7 +33,8 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Crear
             if (string.IsNullOrEmpty(input.Nombre)) throw new ArgumentInputException(Mensaje.Requerido("Nombre"));
             if (string.IsNullOrEmpty(input.Email)) throw new ArgumentInputException(Mensaje.Requerido("Email"));
             if (input.RolId == 0) throw new ArgumentInputException(Mensaje.Requerido("Rol"));
-            if (this._usuarioRepository.ExisteNombre(null, input.Dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.Dni));
+            if (this._usuarioRepository.ExisteDni(input.Dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.Dni));
+
         }
 
         public CrearUsuarioOutput Execute(CrearUsuarioInput input)

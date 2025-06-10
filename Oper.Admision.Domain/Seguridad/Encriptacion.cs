@@ -76,7 +76,7 @@ namespace Oper.Admision.Domain.Seguridad
 
                 tdes.Clear();
 
-                //se regresa el resultado en forma de una cadena
+                //Devuelve el resultado en forma de una cadena
                 texto = Convert.ToBase64String(ArrayResultado, 0, ArrayResultado.Length).Trim();
 
             }
