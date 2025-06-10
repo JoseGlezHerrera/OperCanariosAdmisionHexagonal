@@ -31,24 +31,35 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
         }
         private void Validate(CrearSocioInput input)
         {
+            _logger.LogWarning("Valor recibido en input.sexo: '{Sexo}'", input.sexo);
             _logger.LogInformation("CrearSocioInput es: {@input}", input);
             if (input == null) throw new ArgumentInputException(Mensaje.Socio_Input);
-            if (_socioRepository.ExisteNombre(null, input.dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.dni));
-
+            if (_socioRepository.ExisteDni(input.dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.dni));
             if (string.IsNullOrEmpty(input.dni)) throw new ArgumentInputException(Mensaje.Requerido("dni"));
             if (string.IsNullOrEmpty(input.nombre)) throw new ArgumentInputException(Mensaje.Requerido("nombre"));
             if (string.IsNullOrEmpty(input.calle)) throw new ArgumentInputException(Mensaje.Requerido("calle"));
-            if (string.IsNullOrEmpty(input.dni)) throw new ArgumentInputException(Mensaje.Requerido("telefono"));
+            if (string.IsNullOrEmpty(input.telefono)) throw new ArgumentInputException(Mensaje.Requerido("telefono"));
+            var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
+            if (sexoNormalizado != "masculino" && sexoNormalizado != "femenino") throw new ArgumentInputException("El campo 'sexo' solo admite los valores 'Masculino' o 'Femenino'");
         }
 
         public CrearSocioOutput Execute(CrearSocioInput input)
         {
             Validate(input);
-  
+            var socio = _mapper.Map<Socio>(input);
+            var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CrearSocioInput, Socio>());
-            var mapper = config.CreateMapper();
-            var socio = _mapper.Map<CrearSocioInput, Socio>(input);
+            if (sexoNormalizado != "masculino" && sexoNormalizado != "femenino")
+            {
+                throw new ArgumentInputException("El campo 'sexo' solo admite los valores 'Masculino' o 'Femenino'");
+            }
+            socio.sexo = sexoNormalizado switch
+            {
+                "masculino" => true,
+                "femenino" => false,
+                _ => null
+            };
+
             socio.fecha_modificacion = DateTime.Now;
             var nuevaClave = GeneradorClaves.Token(6);
             _socioRepository.Create(socio);

@@ -21,6 +21,9 @@ namespace Oper.Admision.Domain.IRepositories
         Task EliminarAsync(int id);
         Task<Socio?> ObtenerPorIdAsync(int id);
         List<Socio> ObtenerSociosProhibidos();
+        bool ExisteDni(string dni);
+        bool ExisteDniParaOtroSocio(int id_socio, string dni);
+
 
     }
 }

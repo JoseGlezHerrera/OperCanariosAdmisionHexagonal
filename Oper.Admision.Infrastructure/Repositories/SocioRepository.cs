@@ -137,5 +137,13 @@ namespace Oper.Admision.Infrastructure.Repositories
                     .DistinctBy(s => s.id_socio)
                     .ToList();
         }
+        public bool ExisteDni(string dni)
+        {
+            return _context.Socios.Any(s => s.dni == dni);
+        }
+        public bool ExisteDniParaOtroSocio(int id_socio, string dni)
+        {
+            return _context.Socios.Any(s => s.dni == dni && s.id_socio != id_socio);
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
         public string comentario { get; set; }
         public string foto { get; set; }
         public DateTime? fecha_nacimiento { get; set; }
+        public string sexo { get; set; }
 
 
     }

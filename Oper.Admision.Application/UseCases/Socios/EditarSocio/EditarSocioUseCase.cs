@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using Oper.Admision.Application.Exceptions;
 using Oper.Admision.Application.UseCases.Socios.EditarUsuario;
 using Oper.Admision.Domain;
 using Oper.Admision.Domain.IRepositories;
@@ -36,6 +37,8 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarSocio
             if (input.id_socio <= 0) throw new ArgumentOutOfRangeException(nameof(input.id_socio), "El id_socio debe ser mayor que 0.");
             if (string.IsNullOrEmpty(input.apel1)) throw new ArgumentNullException(nameof(input.apel1));
             if (string.IsNullOrEmpty(input.apel2)) throw new ArgumentNullException(nameof(input.apel2));
+            if (_socioRepository.ExisteDniParaOtroSocio(input.id_socio, input.dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.dni));
+            if (input.sexo == null) throw new ArgumentInputException(Mensaje.Requerido("sexo"));
         }
         public EditarSocioOutput Execute(EditarSocioInput input)
         { 

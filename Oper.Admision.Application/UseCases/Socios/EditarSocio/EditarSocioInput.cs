@@ -13,5 +13,6 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarUsuario
         public string nombre { get; set; }
         public string apel1 { get; set; }
         public string apel2 { get; set; }
+        public string sexo { get; set; } 
     }
 }

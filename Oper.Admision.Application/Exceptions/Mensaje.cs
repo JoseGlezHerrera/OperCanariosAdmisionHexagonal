@@ -21,7 +21,7 @@ namespace Oper.Admision.Application.Exceptions
 
         public static string Requerido(string propiedad) => $"El campo {propiedad} es requerido";
 
-        public static string DNI_DUPLICADO(string dni) => $"El dni, {dni}, está registrado en otro usuario.";
+        public static string DNI_DUPLICADO(string dni) => $"El dni, {dni}, está registrado en otro usuario / socio.";
 
         public const string Rol_Input="El RolInput Rol no puede ser nulo.";
         #endregion

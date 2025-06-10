@@ -10,9 +10,7 @@
         public string calle { get; set; }
         public string telefono { get; set; }
         public string comentario { get; set; }
-
-        public DateTime? fecha_alta { get; set; }
-        public DateTime? fecha_baja { get; set; }
+        public string sexo { get; set; }
         public DateTime? fecha_modificacion { get; set; }
 
     }

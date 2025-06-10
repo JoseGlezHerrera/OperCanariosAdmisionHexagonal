@@ -10,7 +10,8 @@ public class CrearSocioMapping : Profile
         CreateMap<CrearSocioRequest, CrearSocioInput>();
 
         CreateMap<CrearSocioInput, Socio>()
-            .ForMember(dest => dest.fecha_nacimiento, opt => opt.MapFrom(src => src.fecha_nacimiento));
+            .ForMember(dest => dest.fecha_nacimiento, opt => opt.MapFrom(src => src.fecha_nacimiento))
+            .ForMember(dest => dest.sexo, opt => opt.Ignore());
 
         CreateMap<Socio, CrearSocioOutput>();
     }
