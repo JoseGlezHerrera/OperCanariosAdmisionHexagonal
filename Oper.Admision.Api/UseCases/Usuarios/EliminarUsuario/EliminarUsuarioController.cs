@@ -1,30 +1,42 @@
-﻿using AutoMapper;
-using Oper.Admision.Application.UseCases.Rol.GetTodos;
-using Oper.Admision.Application.UseCases.Usuarios.Eliminar;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Oper.Admision.Application.UseCases.Usuarios.EliminarUsuario;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.EliminarUsuario
 {
     [Route("api/usuarios/eliminar")]
     [ApiController]
-    [Authorize]
     public class EliminarUsuarioController : ControllerBase
     {
-        private readonly CambiarPasswordUsuarioUseCase _useCase;
+        private readonly EliminarUsuarioUseCase _eliminarUsuarioUseCase;
+        private readonly ILogger<EliminarUsuarioController> _logger;
 
-        public EliminarUsuarioController(CambiarPasswordUsuarioUseCase useCase)
+        public EliminarUsuarioController(
+            EliminarUsuarioUseCase eliminarUsuarioUseCase,
+            ILogger<EliminarUsuarioController> logger)
         {
-            this._useCase = useCase;
+            _eliminarUsuarioUseCase = eliminarUsuarioUseCase;
+            _logger = logger;
         }
 
-        [HttpDelete("{usuarioId}")]
-        public IActionResult ELiminar(int usuarioId)
+        [HttpDelete("{id}")]
+        public IActionResult EliminarUsuario(int id)
         {
-            var input = new CambiarPasswordUsuarioInput() { UsuarioId = usuarioId };
-            this._useCase.Execute(input);
-            return Ok(true);
+            try
+            {
+                var input = new EliminarUsuarioInput { UsuarioId = id };
+                var mensaje = _eliminarUsuarioUseCase.Execute(input);
+                return Ok(new { mensaje });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al eliminar usuario.");
+                return StatusCode(500, new { mensaje = "Error inesperado al eliminar el usuario." });
+            }
         }
     }
 }

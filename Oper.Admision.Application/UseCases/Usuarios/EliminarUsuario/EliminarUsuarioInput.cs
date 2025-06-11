@@ -1,6 +1,6 @@
-﻿namespace Oper.Admision.Application.UseCases.Usuarios.Eliminar
+﻿namespace Oper.Admision.Application.UseCases.Usuarios.EliminarUsuario
 {
-    public class CambiarPasswordUsuarioInput
+    public class EliminarUsuarioInput
     {
         public int UsuarioId { get;  set; }
     }

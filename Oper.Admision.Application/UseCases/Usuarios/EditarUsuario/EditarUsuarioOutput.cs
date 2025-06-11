@@ -11,5 +11,6 @@
         public DateTime FechaActualizacion { get; set; }
         public DateTime? FechaBaja { get; set; }
         public int RolId { get; set; }
+        public string Mensaje { get; set; }
     }
 }

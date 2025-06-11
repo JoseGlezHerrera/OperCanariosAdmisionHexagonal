@@ -20,7 +20,7 @@ namespace Oper.Admision.Application
             services.AddScoped<UseCases.Usuarios.CambiarPassword.CambiarPasswordUsuarioUseCase>();
             services.AddScoped<UseCases.Usuarios.Crear.CrearUsuarioUseCase>();
             services.AddScoped<UseCases.Usuarios.Editar.EditarUsuarioUseCase>();
-            services.AddScoped<UseCases.Usuarios.Eliminar.CambiarPasswordUsuarioUseCase>();
+            services.AddScoped<UseCases.Usuarios.EliminarUsuario.EliminarUsuarioUseCase>();
             services.AddScoped<UseCases.Usuarios.DarBajaAlta.DarBajaAltaUsuarioUseCase>();
             services.AddScoped<UseCases.Usuarios.Resetear.ResetearUsuarioUseCase>();
             services.AddScoped<UseCases.Usuarios.GetTodos.GetTodosUsuarioUseCase>(); 

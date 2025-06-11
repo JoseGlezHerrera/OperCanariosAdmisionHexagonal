@@ -44,24 +44,25 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarSocio
 
         }
         public EditarSocioOutput Execute(EditarSocioInput input)
-        { 
-            Validate(input);
+        {
             var socio = this._socioRepository.Get(input.id_socio);
+            if (socio == null)
+                throw new KeyNotFoundException($"No existe el socio con id {input.id_socio}");
+            Validate(input);
             socio.dni = input.dni;
             socio.nombre = input.nombre;
             socio.apel1 = input.apel1;
-            socio.id_socio = input.id_socio;
             socio.apel2 = input.apel2;
-            var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
-            socio.sexo = sexoNormalizado switch
-            {
-                "masculino" => true,
-                "femenino" => false,
-                _ => null 
-            };
+            socio.sexo = input.sexo?.Trim().ToLowerInvariant() == "masculino" ? true
+                        : input.sexo?.Trim().ToLowerInvariant() == "femenino" ? false
+                        : (bool?)null;
+
             this._socioRepository.Update(socio);
             this._uow.Save();
-            return this.BuildOutPut(socio);
+
+            var output = BuildOutPut(socio);
+            output.Mensaje = $"Socio {socio.id_socio} editado correctamente.";
+            return output;
         }
         private EditarSocioOutput BuildOutPut(Socio entidad)
         {

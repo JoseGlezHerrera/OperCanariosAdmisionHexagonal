@@ -16,5 +16,6 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarSocio
         public Nullable<System.DateTime> fecha_alta { get; set; }
         public Nullable<System.DateTime> fecha_baja { get; set; }
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
+        public string Mensaje { get; set; }
     }
 }
