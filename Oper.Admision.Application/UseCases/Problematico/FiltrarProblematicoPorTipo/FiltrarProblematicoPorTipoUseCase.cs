@@ -1,9 +1,7 @@
 ﻿using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Models;
-using System;
+using Oper.Admision.Application.Exceptions;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Oper.Admision.Application.UseCases.Problematico.FiltrarProblematicoPorTipo
@@ -11,13 +9,20 @@ namespace Oper.Admision.Application.UseCases.Problematico.FiltrarProblematicoPor
     public class FiltrarProblematicoPorTipoUseCase
     {
         private readonly IProblematicoRepository _repo;
+
         public FiltrarProblematicoPorTipoUseCase(IProblematicoRepository repo)
         {
             _repo = repo;
         }
-        public async Task<List<ProblematicoVista>>Handle (FiltrarProblematicoPorTipoInput input)
+
+        public async Task<List<ProblematicoVista>> Handle(FiltrarProblematicoPorTipoInput input)
         {
-            return await _repo.FiltrarPorTipoAsync(input.Tipo);
+            var resultados = await _repo.FiltrarPorTipoAsync(input.Tipo);
+
+            if (resultados == null || resultados.Count == 0)
+                throw new ArgumentInputException($"No se encontraron registros para el tipo: '{input.Tipo}'.");
+
+            return resultados;
         }
     }
 }

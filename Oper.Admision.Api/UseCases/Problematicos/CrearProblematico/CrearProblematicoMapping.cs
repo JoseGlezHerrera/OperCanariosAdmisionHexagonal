@@ -20,9 +20,9 @@ public class CrearProblematicoMapping : Profile
             .ForMember(dest => dest.ProhibidaEntrada, opt => opt.MapFrom(src => src.prohibida_entrada))
             .ForMember(dest => dest.Gobcan, opt => opt.MapFrom(src => src.gobcan))
             .ForMember(dest => dest.TipoProblematico, opt => opt.MapFrom(src =>
-                src.conflictivo ? 3 :
+                src.gobcan ? 3 :
                 src.prohibida_entrada ? 2 :
-                src.gobcan ? 1 : 0
+                src.conflictivo ? 1 : 0
             ));
         CreateMap<CrearProblematicoOutput, CrearProblematicoResponse>();
     }

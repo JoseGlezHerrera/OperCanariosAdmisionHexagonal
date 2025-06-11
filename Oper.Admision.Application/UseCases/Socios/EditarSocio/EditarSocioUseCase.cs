@@ -38,7 +38,10 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarSocio
             if (string.IsNullOrEmpty(input.apel1)) throw new ArgumentNullException(nameof(input.apel1));
             if (string.IsNullOrEmpty(input.apel2)) throw new ArgumentNullException(nameof(input.apel2));
             if (_socioRepository.ExisteDniParaOtroSocio(input.id_socio, input.dni)) throw new ArgumentInputException(Mensaje.DNI_DUPLICADO(input.dni));
-            if (input.sexo == null) throw new ArgumentInputException(Mensaje.Requerido("sexo"));
+            var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
+            if (sexoNormalizado != "masculino" && sexoNormalizado != "femenino")
+                throw new ArgumentInputException("El campo 'sexo' solo admite los valores 'Masculino' o 'Femenino'");
+
         }
         public EditarSocioOutput Execute(EditarSocioInput input)
         { 
@@ -49,7 +52,13 @@ namespace Oper.Admision.Application.UseCases.Socios.EditarSocio
             socio.apel1 = input.apel1;
             socio.id_socio = input.id_socio;
             socio.apel2 = input.apel2;
-
+            var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
+            socio.sexo = sexoNormalizado switch
+            {
+                "masculino" => true,
+                "femenino" => false,
+                _ => null 
+            };
             this._socioRepository.Update(socio);
             this._uow.Save();
             return this.BuildOutPut(socio);
