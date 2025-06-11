@@ -8,6 +8,6 @@ namespace Oper.Admision.Application.UseCases.Sesiones.GetSesion
 {
     public class GetSesionInput
     {
-
+        public int Id { get; set; }
     }
 }

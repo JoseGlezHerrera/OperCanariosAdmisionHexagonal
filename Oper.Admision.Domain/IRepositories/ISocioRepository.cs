@@ -23,7 +23,7 @@ namespace Oper.Admision.Domain.IRepositories
         List<Socio> ObtenerSociosProhibidos();
         bool ExisteDni(string dni);
         bool ExisteDniParaOtroSocio(int id_socio, string dni);
-
+        Task<bool> ExisteAsync(int id);
 
     }
 }

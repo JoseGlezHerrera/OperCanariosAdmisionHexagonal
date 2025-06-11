@@ -17,7 +17,7 @@ namespace Oper.Admision.Application.UseCases.Sesiones.GetSesion
 
         public Task<GetSesionOutput> Execute(GetSesionInput input)
         {
-            var sesion = _repository.Get(1);
+            var sesion = _repository.Get(input.Id);
 
             if (sesion == null)
                 throw new Exception("Sesión no encontrada.");

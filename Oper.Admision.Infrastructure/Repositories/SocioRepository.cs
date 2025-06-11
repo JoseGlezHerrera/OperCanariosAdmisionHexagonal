@@ -47,7 +47,6 @@ namespace Oper.Admision.Infrastructure.Repositories
         public void Delete(int id_socio)
         {
             var entidad = this.Get(id_socio);
-            //entidad.Eliminado = true;
             this._context.Entry(entidad).State = EntityState.Modified;
         }
 
@@ -144,6 +143,10 @@ namespace Oper.Admision.Infrastructure.Repositories
         public bool ExisteDniParaOtroSocio(int id_socio, string dni)
         {
             return _context.Socios.Any(s => s.dni == dni && s.id_socio != id_socio);
+        }
+        public async Task<bool> ExisteAsync(int id)
+        {
+            return await _context.Socios.AnyAsync(s => s.id_socio == id);
         }
     }
 }

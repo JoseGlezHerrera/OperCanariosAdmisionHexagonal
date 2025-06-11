@@ -17,10 +17,10 @@ namespace Oper.Admision.Api.UseCases.Sesiones.GetSesion
             _mapper = mapper;
         }
 
-        [HttpGet("GetSesion")]
-        public async Task<IActionResult> GetSesion()
+        [HttpGet("GetSesion/{id}")]
+        public async Task<IActionResult> GetSesion(int id)
         {
-            var input = new GetSesionInput();
+            var input = new GetSesionInput { Id = id };
             var output = await _useCase.Execute(input);
             return Ok(output);
         }
