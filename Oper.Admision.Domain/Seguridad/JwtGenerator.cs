@@ -20,10 +20,8 @@ namespace Oper.Admision.Infrastructure.Seguridad
         {
             var claims = new[]
             {
-                // ✅ Este es el claim correcto que el middleware necesita
-                new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
 
-                // Opcionales, pero útiles
+                new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Nombre ?? ""),
                 new Claim("rolId", usuario.RolId?.ToString() ?? "")
             };

@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Oper.Admision.Application.Exceptions;
-using Oper.Admision.Application.UseCases.Usuarios.Crear;
 using Oper.Admision.Domain;
 using Oper.Admision.Domain.IRepositories;
 using Oper.Admision.Domain.Models;
 using Oper.Admision.Domain.Seguridad;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
 {
@@ -27,8 +22,8 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
             _uow = uow;
             _socioRepository = socioRepository;
             _logger = logger;
-
         }
+
         private void Validate(CrearSocioInput input)
         {
             _logger.LogWarning("Valor recibido en input.sexo: '{Sexo}'", input.sexo);
@@ -41,6 +36,7 @@ namespace Oper.Admision.Application.UseCases.Socios.CrearSocio
             if (string.IsNullOrEmpty(input.telefono)) throw new ArgumentInputException(Mensaje.Requerido("telefono"));
             var sexoNormalizado = input.sexo?.Trim().ToLowerInvariant();
             if (sexoNormalizado != "masculino" && sexoNormalizado != "femenino") throw new ArgumentInputException("El campo 'sexo' solo admite los valores 'Masculino' o 'Femenino'");
+            if (input.fecha_nacimiento > DateTime.Now.AddYears(-18)) throw new ArgumentInputException("El socio debe ser mayor de edad (18 años) para poder ser registrado");
         }
 
         public CrearSocioOutput Execute(CrearSocioInput input)

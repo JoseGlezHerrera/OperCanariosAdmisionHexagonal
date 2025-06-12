@@ -21,8 +21,15 @@ namespace Oper.Admision.Api.UseCases.Visitas.GetVisita
         [HttpGet("GetVisitas")]
         public async Task<IActionResult> GetVisitas()
         {
-            var resultado = await _useCase.ExecuteAsync();
-            return Ok(resultado);
+            try
+            {
+                var resultado = await _useCase.ExecuteAsync();
+                return Ok(new { status = "success", datos = resultado });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { status = "error", mensaje = "Error interno al obtener las visitas" });
+            }
         }
     }
 }

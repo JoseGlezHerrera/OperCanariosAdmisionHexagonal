@@ -30,6 +30,7 @@ namespace Oper.Admision.Api.UseCases.Socios.CrearSocio
 
             return Ok(output);
         }
+
         [HttpGet("ObtenerTodos")]
         public async Task<IActionResult> ObtenerTodos()
         {

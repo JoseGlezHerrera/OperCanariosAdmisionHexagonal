@@ -22,6 +22,7 @@ namespace Oper.Admision.Infrastructure.Repositories
         public async Task<List<Visita>> ObtenerPorSocioIdAsync(int socioId)
         {
             return await _context.Visita
+                .Include(v => v.Socio)
                 .Where(v => v.id_socio == socioId)
                 .ToListAsync();
         }
@@ -35,7 +36,7 @@ namespace Oper.Admision.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("⚠️ Error al guardar Visita: " + ex.InnerException?.Message ?? ex.Message);
+                Console.WriteLine("Error al guardar Visita: " + ex.InnerException?.Message ?? ex.Message);
                 throw;
             }
         }
@@ -89,6 +90,23 @@ namespace Oper.Admision.Infrastructure.Repositories
             {
                 Console.WriteLine("Error al registrar Visita: " + ex.InnerException?.Message ?? ex.Message);
                 throw;
+            }
+        }
+        public async Task<Visita?> GetByIdAsync(int id)
+        {
+            return await _context.Visita.FindAsync(id);
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var visita = await _context.Visita.FindAsync(id);
+            if (visita != null)
+            {
+                _context.Visita.Remove(visita);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("La visita no existe");
             }
         }
     }

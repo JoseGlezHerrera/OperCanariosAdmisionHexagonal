@@ -20,5 +20,12 @@ namespace Oper.Admision.Application.UseCases.Visita.EliminarVisita
             else
                 return $"No se encontró ninguna visita con ID {input.Id}.";
         }
+        public async Task Handle(int visitaId)
+        {
+            var visita = await _visitaRepository.GetByIdAsync(visitaId);
+            if (visita == null)
+                throw new InvalidOperationException("La visita no existe");
+            await _visitaRepository.DeleteAsync(visitaId);
+        }
     }
 }

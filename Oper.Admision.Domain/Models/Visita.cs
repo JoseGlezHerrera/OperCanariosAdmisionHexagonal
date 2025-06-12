@@ -17,5 +17,8 @@ namespace Oper.Admision.Domain.Models
         public DateTime fecha_hora { get; set; }
         public string? motivo { get; set; }
         public virtual Sesion Sesion { get; set; }
+        [ForeignKey(nameof(id_socio))]
+        public virtual Socio Socio { get; set; }
+
     }
 }

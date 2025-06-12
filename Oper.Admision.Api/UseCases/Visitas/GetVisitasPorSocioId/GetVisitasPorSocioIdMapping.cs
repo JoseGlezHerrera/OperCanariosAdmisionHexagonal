@@ -12,7 +12,8 @@ namespace Oper.Admision.Api.UseCases.Visitas.GetVisitasPorSocioId
             CreateMap<Visita, GetVisitasPorSocioIdOutput>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.id_visita))
                 .ForMember(dest => dest.Fecha, opt => opt.MapFrom(src => src.fecha_hora))
-                .ForMember(dest => dest.SocioId, opt => opt.MapFrom(src => src.id_socio));
+                .ForMember(dest => dest.SocioId, opt => opt.MapFrom(src => src.id_socio))
+                .ForMember(dest => dest.NombreSocio, opt => opt.MapFrom(src => src.Socio != null ? src.Socio.nombre : null));
         }
     }
 }

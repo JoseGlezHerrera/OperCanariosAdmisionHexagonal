@@ -14,5 +14,7 @@ namespace Oper.Admision.Domain.IRepositories
         Task InsertAsync(Visita visita);
         bool ExisteVisita(int socioId, int sesionId);
         void Registrar(Visita visita);
+        Task<Visita?> GetByIdAsync(int id);
+        Task DeleteAsync(int visitaId);
     }
 }

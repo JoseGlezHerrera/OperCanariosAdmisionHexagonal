@@ -20,10 +20,17 @@ namespace Oper.Admision.Api.UseCases.Visitas.GetVisitasPorSocioId
         [HttpGet("por-socio/{socioId}")]
         public async Task<IActionResult> GetVisitasPorSocio(int socioId)
         {
-            var input = new GetVisitasPorSocioIdInput { SocioId = socioId };
-            var output = await _useCase.Execute(input);
-            var response = _mapper.Map<List<GetVisitasPorSocioIdResponse>>(output);
-            return Ok(response);
+            try
+            {
+                var input = new GetVisitasPorSocioIdInput { SocioId = socioId };
+                var output = await _useCase.Execute(input);
+                var response = _mapper.Map<List<GetVisitasPorSocioIdResponse>>(output);
+                return Ok(new { status = "success", datos = response });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { status = "error", mensaje = "Error interno al obtener visitas por socio." });
+            }
         }
     }
 }

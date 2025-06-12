@@ -31,7 +31,6 @@ namespace Oper.Admision.Application.UseCases.Visitas.CrearVisita
             var socioExiste = await _socioRepository.ExisteAsync(input.SocioId);
             if (!socioExiste)
                 throw new ArgumentInputException($"El socio con ID {input.SocioId} no existe.");
-
             try
             {
                 var visita = _mapper.Map<Oper.Admision.Domain.Models.Visita>(input);

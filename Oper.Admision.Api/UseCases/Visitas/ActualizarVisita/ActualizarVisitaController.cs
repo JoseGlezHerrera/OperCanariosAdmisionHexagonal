@@ -17,8 +17,22 @@ namespace Oper.Admision.Api.UseCases.Visitas.ActualizarVisita
         [HttpPut]
         public async Task<IActionResult> Actualizar([FromBody] ActualizarVisitaInput input)
         {
-            await _useCase.EjecutarAsync(input);
-            return Ok(new { mensaje = "Visita actualizada correctamente" });
+            if (!ModelState.IsValid)
+                return BadRequest(new { status = "error", mensaje = "Datos inválidos." });
+
+            try
+            {
+                await _useCase.EjecutarAsync(input);
+                return Ok(new { status = "success", mensaje = "Visita actualizada correctamente" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { status = "error", mensaje = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { status = "error", mensaje = "Error interno al actualizar la visita." });
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
 namespace Oper.Admision.Api.UseCases.Problematicos.ObtenerProblematicoID;
 
 [Route("api/problematicos/obtener-por-id")]

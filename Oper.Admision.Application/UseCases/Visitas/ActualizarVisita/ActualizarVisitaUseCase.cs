@@ -19,7 +19,7 @@ namespace Oper.Admision.Application.UseCases.Visitas.ActualizarVisita
             var visita = await _visitaRepository.ObtenerPorIdAsync(input.IdVisita);
             if (visita == null)
             {
-                throw new Exception("Visita no encontrada");
+                throw new InvalidOperationException("La visita no existe.");
             }
             visita.fecha_hora = input.fecha;
             visita.id_sesion = input.IdSesion;

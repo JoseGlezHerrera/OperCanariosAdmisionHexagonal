@@ -163,15 +163,12 @@ builder.Host.UseSerilog();
 
 var app = builder.Build();
 
-// Middlewares
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<ExpiracionSesionApiMiddleware>();
 
-// JWT: Validar token antes de acceder a claims
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Acceder al claim NameIdentifier (ya validado por el token)
 app.UseMiddleware<UsuarioApiMiddleware>();
 
 if (app.Environment.IsDevelopment())
