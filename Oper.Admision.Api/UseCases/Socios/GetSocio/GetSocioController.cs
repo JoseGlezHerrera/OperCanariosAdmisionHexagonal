@@ -27,9 +27,36 @@ namespace Oper.Admision.Api.UseCases.Socios.GetSocio
         [HttpGet("CumplesHoy")]
         public async Task<IActionResult> ObtenerCumpleañeros()
         {
-            var resultado = await _obtenerCumplesUseCase.EjecutarAsync();
-            var response = _mapper.Map<List<ObtenerCumpleañerosResponse>>(resultado);
-            return Ok(response);
+            try
+            {
+                var resultado = await _obtenerCumplesUseCase.EjecutarAsync();
+                var response = _mapper.Map<List<ObtenerCumpleañerosResponse>>(resultado);
+
+                if (response == null || !response.Any())
+                {
+                    return Ok(new
+                    {
+                        status = "success",
+                        datos = new List<ObtenerCumpleañerosResponse>(),
+                        mensaje = "Ningún socio cumple años hoy."
+                    });
+                }
+
+                return Ok(new
+                {
+                    status = "success",
+                    datos = response,
+                    mensaje = $"Total de cumpleañeros hoy: {response.Count}"
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new
+                {
+                    status = "error",
+                    mensaje = "Error interno al obtener los cumpleañeros."
+                });
+            }
         }
     }
 }
