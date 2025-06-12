@@ -23,7 +23,7 @@ namespace Oper.Admision.Api.UseCases.Usuarios.ResetearUsuario
         {
             var input = new ResetearUsuarioInput() { UsuarioId = request.UsuarioId };
             var resultado = this._useCase.Execute(input);
-            return Ok(resultado);
+            return Ok("Se ha reseteado la contraseña. ");
         }
     }
 }

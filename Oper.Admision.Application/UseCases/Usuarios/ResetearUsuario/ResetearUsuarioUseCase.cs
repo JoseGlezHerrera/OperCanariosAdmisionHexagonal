@@ -31,7 +31,7 @@ namespace Oper.Admision.Application.UseCases.Usuarios.Resetear
             Validate(input);
             var usuario = this._usuarioRepository.Get(input.UsuarioId);
             var nuevaClave = GeneradorClaves.Token(6);
-            usuario.Password = Encriptacion.Encriptar(nuevaClave); // Se encripta la clave creada para el usuario.
+            usuario.Password = Encriptacion.Encriptar(nuevaClave);
             usuario.FechaActualizacion = DateTime.Now;
             this._uow.Save();
             this.EnviarNotificacion(usuario, nuevaClave);
