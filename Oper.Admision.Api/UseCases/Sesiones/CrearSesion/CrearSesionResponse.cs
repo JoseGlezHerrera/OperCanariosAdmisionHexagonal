@@ -11,7 +11,5 @@
         public int habituales { get; set; }
         public DateTime fecha_fin { get; set; }
         public int id_sede { get; set; }
-
-        // public virtual Sede sede { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Oper.Admision.Application.UseCases.Usuarios.DarBajaAlta;
+using Oper.Admision.Domain.Models;
 
 namespace Oper.Admision.Api.UseCases.Usuarios.DarBajaAltaUsuario
 {
@@ -9,6 +10,7 @@ namespace Oper.Admision.Api.UseCases.Usuarios.DarBajaAltaUsuario
         {
             CreateMap<DarBajaAltaUsuarioRequest, DarBajaAltaUsuarioInput>();
             CreateMap<DarBajaAltaUsuarioOutput, DarBajaAltaUsuarioResponse>();
+            CreateMap<Usuario, DarBajaAltaUsuarioOutput>();
         }
     }
 }

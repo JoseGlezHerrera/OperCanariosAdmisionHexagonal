@@ -26,12 +26,6 @@ namespace Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario
             _logger = logger;
         }
 
-        /// PUT /api/usuario/cambiar-password
-        /// Recibe un JSON:
-        /// {
-        ///   "usuarioId": 123,
-        ///   "password": "NuevaClave123"
-
         [HttpPut("cambiar-password")]
         public IActionResult CambiarPassword([FromBody] CambiarPasswordUsuarioRequest request)
         {
@@ -52,7 +46,6 @@ namespace Oper.Admision.Api.UseCases.Usuarios.CambiarPasswordUsuario
                 }
                 else
                 {
-                    // Si el UseCase devolvió false, significa que la nueva contraseña es igual a la actual
                     return BadRequest(new { mensaje = "La nueva contraseña es igual a la actual." });
                 }
             }

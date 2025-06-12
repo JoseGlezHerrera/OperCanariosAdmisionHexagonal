@@ -24,14 +24,6 @@ namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
             _logger = logger;
         }
 
-
-        /// POST /api/usuarios/login
-        /// Recibe un JSON:
-        /// {
-        ///   "nombre": "usuario",
-        ///   "password": "clave"
-        /// }
-
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginUsuarioRequest request)
         {
@@ -50,7 +42,6 @@ namespace Oper.Admision.Api.UseCases.Usuarios.LoginUsuario
             catch (System.Exception ex)
             {
                 _logger.LogWarning(ex, "Error en Login: {Mensaje}", ex.Message);
-                // Si falla login (credenciales inválidas, excepción, etc.), devolvemos 401
                 return Unauthorized(new { mensaje = ex.Message });
             }
         }

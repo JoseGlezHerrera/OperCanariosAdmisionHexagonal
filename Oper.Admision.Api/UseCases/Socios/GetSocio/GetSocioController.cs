@@ -22,7 +22,15 @@ namespace Oper.Admision.Api.UseCases.Socios.GetSocio
         [HttpGet("obtener-todos")]
         public IActionResult GetSocios()
         {
-            return Ok(this._useCase.Execute());
+            try
+            {
+                var resultado = this._useCase.Execute();
+                return Ok(new { status = "success", datos = resultado });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { status = "error", mensaje = "Error interno al obtener socios." });
+            }
         }
         [HttpGet("CumplesHoy")]
         public async Task<IActionResult> ObtenerCumpleañeros()
